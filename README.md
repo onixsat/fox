@@ -28,73 +28,31 @@
 <h2 style="font-style:italic;">Instalação</h2>
 <h6 style="font-style:italic;">Executar os comandos para instalar o sistema.</h6>
 
+* __Setup__
 ```bash
-apt install net-tools
+# Verificar portas nginx
+sudo apt install net-tools
 netstat -tlnp | grep nginx
 
 # Backup e Restaurar ficheiros com password
 sudo zip -r -e /home/backup.zip /etc/nginx
 sudo unzip -d / backup.zip 
- ```
- 
-```bash
-  sudo su
-  sudo apt update -y
-  sudo apt install -y git nano wget dos2unix
-  git clone https://github.com/onixsat/fox.git
-  dos2unix fox/*
-  find -name '*.sh' -print0 | xargs -0 dos2unix
-  cd fox
-  bash btk.sh
- ```
 
-```bash
+# Instalar aplicação privada
+sudo su
+sudo apt update -y
+sudo apt install -y git nano wget dos2unix
+git clone https://github.com/onixsat/fox.git
+dos2unix fox/*
+find -name '*.sh' -print0 | xargs -0 dos2unix
+cd fox
+bash btk.sh
 
 # Comandos
 nginx-t
 systemctl restart nginx
 systemctl restart nginx-ui
-
-
-bash -c "$(curl -L https://cloud.nginxui.com/install.sh)" @ install
-
-wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/setup.sh && chmod u+x setup.sh && bash setup.sh
-
-server {
-        listen 443 ssl;
-        ssl_certificate /etc/letsencrypt/live/example.com;/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; # managed by Certbot
-        return 301 https://example.com:8080$request_uri;
-}
-
 ```
-
-```bash
-  sudo su
-  sudo apt update -y
-  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/nginx.conf
-  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/sites-enabled/default
-  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/sites-available/bo.conf
-  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/sites-available/lb.conf
-
-  # BACKUP ORIGINAIS
-zip -r -e filename.zip folder
-  sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bkp2
-  sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bkp2
-  sudo cp /etc/nginx/sites-available/bo.conf /etc/nginx/sites-available/bo.conf.bkp2
-  sudo cp /etc/nginx/sites-available/lb.conf /etc/nginx/sites-available/lb.conf.bkp2
-
-  # NOVOS
-  sudo cp nginx.conf /etc/nginx/nginx.conf
-  sudo cp default /etc/nginx/sites-enabled/default
-  sudo cp bo.conf /etc/nginx/sites-available/bo.conf
-  sudo cp lb.conf /etc/nginx/sites-available/lb.conf
-
-  nginx-t
-
-  systemctl restart nginx
- ```
- 
 
 <sm style="font-style:italic;">
   Ao iniciar vai criar o ficheiro de configuração seguro em <a href="config/config.sh.enc">config/config.sh.enc</a>
@@ -170,6 +128,51 @@ _Códigos de script básicos para utilização na shell linux._
   esperar carregar "${WHITE}Carregando..." "Carregado!"
   ```
 
+
+
+</div>
+
+
+<div id="xxx">
+
+* __xxx__
+```bash
+
+bash -c "$(curl -L https://cloud.nginxui.com/install.sh)" @ install
+
+wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/setup.sh && chmod u+x setup.sh && bash setup.sh
+
+server {
+        listen 443 ssl;
+        ssl_certificate /etc/letsencrypt/live/example.com;/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; # managed by Certbot
+        return 301 https://example.com:8080$request_uri;
+}
+
+  sudo su
+  sudo apt update -y
+  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/nginx.conf
+  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/sites-enabled/default
+  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/sites-available/bo.conf
+  wget https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/sites-available/lb.conf
+
+  # BACKUP ORIGINAIS
+zip -r -e filename.zip folder
+  sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bkp2
+  sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bkp2
+  sudo cp /etc/nginx/sites-available/bo.conf /etc/nginx/sites-available/bo.conf.bkp2
+  sudo cp /etc/nginx/sites-available/lb.conf /etc/nginx/sites-available/lb.conf.bkp2
+
+  # NOVOS
+  sudo cp nginx.conf /etc/nginx/nginx.conf
+  sudo cp default /etc/nginx/sites-enabled/default
+  sudo cp bo.conf /etc/nginx/sites-available/bo.conf
+  sudo cp lb.conf /etc/nginx/sites-available/lb.conf
+
+  nginx-t
+
+  systemctl restart nginx
+    ```
 </div>
 
 </details>
