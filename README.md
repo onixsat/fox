@@ -59,9 +59,7 @@ listen [::]:443 http2 ipv6only=off ssl;
 ```
 
 <p>
-<sm>
-Ver o script <a href="secure.sh" target="_blank">secure.sh</a>
-</sm>
+<sub>Ver o script <a href="secure.sh" target="_blank">secure.sh</a></sub>
 </p>
 
 
