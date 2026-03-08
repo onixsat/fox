@@ -56,19 +56,7 @@ systemctl restart nginx-ui
     listen [::]:443 http2 ipv6only=off ssl;
 
 ```
-Check out my portfolio [here](https://yourwebsite.com).
-
-<a href="https://example.com" target="_blank">Click me</a>
-
-<!--
-Source - https://stackoverflow.com/a/66887178
-Posted by M.H. Tajaddini
-Retrieved 2026-03-08, License - CC BY-SA 4.0
--->
-
-[normal link](https://www.google.com/)
-
-<a href="https://www.google.com/" style="color: black; text-decoration: underline;text-decoration-style: dotted;">custom link</a>
+Ver o script <a href="secure.sh">secure.sh</a>
 
 
 
