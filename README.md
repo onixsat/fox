@@ -29,7 +29,7 @@
 <h6 style="font-style:italic;">Executar os comandos para instalar o sistema.</h6>
 
 * __Setup__
-```bash
+  ```bash
 # Verificar portas nginx
 sudo apt install net-tools
 netstat -tlnp | grep nginx
@@ -52,7 +52,7 @@ bash btk.sh
 nginx-t
 systemctl restart nginx
 systemctl restart nginx-ui
-```
+  ```
 
 <sm style="font-style:italic;">
   Ao iniciar vai criar o ficheiro de configuração seguro em <a href="config/config.sh.enc">config/config.sh.enc</a>
