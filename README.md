@@ -52,12 +52,14 @@ nginx-t
 systemctl restart nginx
 systemctl restart nginx-ui
 
-    listen 443 http2 ipv6only=off ssl;
-    listen [::]:443 http2 ipv6only=off ssl;
+# Extra
+listen 443 http2 ipv6only=off ssl;
+listen [::]:443 http2 ipv6only=off ssl;
 
 ```
+<sm>
 Ver o script <a href="secure.sh">secure.sh</a>
-
+</sm>
 
 
 
