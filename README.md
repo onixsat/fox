@@ -28,15 +28,15 @@
 <h2 style="font-style:italic;">Instalação</h2>
 <h6 style="font-style:italic;">Executar os comandos para instalar o sistema.</h6>
 
-* __Setup__\
+* __Setup__
   *Bloquear alteração de ficheiros*
-  ```bash
-  # Verificar portas nginx
-  sudo apt install net-tools
-  netstat -tlnp | grep nginx
+```bash
+# Verificar portas nginx
+sudo apt install net-tools
+netstat -tlnp | grep nginx
 
-  # Backup e Restaurar ficheiros com password
-  sudo zip -r -e /home/backup.zip /etc/nginx
+# Backup e Restaurar ficheiros com password
+sudo zip -r -e /home/backup.zip /etc/nginx
 sudo unzip -d / backup.zip 
 
 # Instalar aplicação privada
@@ -52,9 +52,8 @@ bash btk.sh
 # Comandos
 nginx-t
 systemctl restart nginx
-  systemctl restart nginx-ui
-  
-  ```
+systemctl restart nginx-ui
+```
 
 <sm style="font-style:italic;">
   Ao iniciar vai criar o ficheiro de configuração seguro em <a href="config/config.sh.enc">config/config.sh.enc</a>
