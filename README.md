@@ -61,7 +61,7 @@ listen [::]:443 http2 ipv6only=off ssl;
 
 _Ver o script <a href="secure.sh" target="_blank">secure.sh</a>_
 
-_Ver o script <a href="https://www.defensive-security.com/blog/preventing-modification-of-etcldsopreload-with-selinux" target="_blank">preventing-modification-of-etcldsopreload-with-selinux</a>_
+<sub>_Ver o script <a href="https://www.defensive-security.com/blog/preventing-modification-of-etcldsopreload-with-selinux" target="_blank">preventing-modification-of-etcldsopreload-with-selinux</a>_</sub>
 
 
 <sub style="font-style:italic;">
