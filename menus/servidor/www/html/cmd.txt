@@ -1,0 +1,83 @@
+    1  cd /var/www/stream/
+    2  ls
+    3  nano index.php 
+    4  sudo apt install openssh-server -y
+    5  sudo nano /etc/ssh/sshd_config
+    6  sudo groupadd sftpusers
+    7  sudo useradd -m -G sftpusers -s /usr/sbin/no
+    8  sudo passwd sftpuser
+    9  sudo usermod -G sftpusers -s /usr/sbin/nologin ubuntu
+   10  sudo usermod -G sftpusers -s /usr/sbin/nologin root
+   11  sudo mkdir -p /home/sftpuser/sftpfiles
+   12  sudo systemctl restart ssh
+   13  sudo systemctl start sshd
+   14  sudo systemctl enable sshd
+   15  sudo addgroup sftpcorner
+   16  sudo adduser exampleuser
+   17  sudo usermod -G sftpcorner exampleuser
+   18  sudo chown root:root /
+   19  sudo chown -R exampleuser:exampleuser /
+   20  sudo chmod -R 777 /
+   21  sudo chmod -R 777 
+   22  sudo chmod -R 777 /var/www/stream
+   23  sudo chmod -R 777 /var/www/stream/*
+   24  sudo nano /etc/ssh/sshd_config
+   25  nano /etc/ssh/sshd_config
+   26  sudo systemctl restart ssh
+   27  sudo systemctl restart sshd
+   28  sudo apt-get update -y
+   29  sudo apt-get upgrade -y
+   30  sudo apt-get install nginx -y
+   31  sudo apt-get install php8.1-fpm -y
+   32  sudo nano /etc/nginx/sites-available/default
+   33  sudo nginx -t
+   34  sudo systemctl restart nginx
+   35  sudo chmod -R 777 /var/www/html
+   36  sudo apt install ufw -y
+   37  sudo apt install net-tools
+   38  sudo nano /etc/nginx/sites-available/default
+   39  nginx status
+   40  apt nginx status
+   41  sudo systemctl status nginx
+   42  sudo systemctl status php8.1-fpm
+   43  echo "<?php phpinfo(); ?>" >> /var/www/html/info.php
+   44  cd /var/www/html/
+   45  ls
+   46  nano index.php 
+   47  sudo add-apt-repository ppa:ondrej/php
+   48  sudo apt-get install php7.1-mcrypt
+   49  php -m | grep mcrypt
+   50  sudo apt-get install php8.1-mcrypt
+   51  php -m | grep mcrypt
+   52  nano index.php 
+   53  rm index.nginx-debian.html 
+   54  nano index.php 
+   55  cd ..
+   56  mkdir stream
+   57  sudo chmod -R 777 /var/www/stream/
+   58  cd stream/
+   59  nano index.php
+   60  sudo systemctl start nginx-ui
+   61  sudo systemctl status nginx-ui
+   62  cd /etc/nginx/sites-available
+   63  nano nginx-ui.conf
+   64  nano default 
+   65  cd ../sites-enabled/
+   66  ls
+   67  cd ../sites-available/
+   68  ls
+   69  sudo apt install certbot python3-certbot-nginx -y
+   70  sudo certbot --nginx -d vps-3026dd85.vps.ovh.net -m admin@example.com --agree-tos --no-eff
+   71  sudo certbot --nginx -d vps-3026dd85.vps.ovh.net -m explodgf@gmail.com --agree-tos --no-eff
+   72  nano default 
+   73  sudo nginx -t
+   74  sudo chmod -R 777 /var/www/stream/*
+   75  sudo chmod -R 777 /var/www/html/*
+   76  cd /tmp/nginx-ui-search-index-4147025960/
+   77  ls
+   78  cd store/
+   79  ls
+   80  sudo nginx -t
+   81  history >
+   82  history
+   83  history > cmd.txt
