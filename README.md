@@ -59,11 +59,11 @@ listen [::]:443 http2 ipv6only=off ssl;
 ```
 
 <p>
-<sub>Ver o script <a href="secure.sh" target="_blank">secure.sh</a></sub>
+*Ver o script <a href="secure.sh" target="_blank">secure.sh</a>*
 </p>
 
 
-<sm style="font-style:italic;">
+<sub style="font-style:italic;">
   Ao iniciar vai criar o ficheiro de configuração seguro em <a href="config/config.sh.enc">config/config.sh.enc</a>
   <br>
   Ao iniciar novamente digite a sua password para desencriptar o ficheiro seguro localmente e iniciar o programa.
@@ -71,7 +71,7 @@ listen [::]:443 http2 ipv6only=off ssl;
   
   _Nota: O arquivo descodificado será eliminado da maquina local quando desligar o terminal._
 
-</sm>
+</sub>
 
 </div>
 
