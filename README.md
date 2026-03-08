@@ -29,7 +29,6 @@
 <h6 style="font-style:italic;">Executar os comandos para instalar o sistema.</h6>
 
 * __Setup__
-  *Bloquear alteração de ficheiros*
 ```bash
 # Verificar portas nginx
 sudo apt install net-tools
