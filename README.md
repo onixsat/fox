@@ -72,9 +72,7 @@ _Ver o script <a href="secure.sh" target="_blank">secure.sh</a>_
   _Nota: O arquivo descodificado será eliminado da maquina local quando desligar o terminal._
 
 </sub>
-
 </div>
-
 <details id="PASSWORDS">
   <summary><h4 style="font-style:italic;">Default Passwords</h4></summary>
 
@@ -83,7 +81,6 @@ _Ver o script <a href="secure.sh" target="_blank">secure.sh</a>_
 <sub>[ [SSH](root) Username: $\textcolor{green}{\textsf{root}}\$ ]  $\textcolor{cyan}{\textsf{Password+2024}}$</sub>\
 <sup>[ [Encriptação](root) $\textcolor{green}{\textsf{Sistema}}\$ ] $\textcolor{cyan}{\textsf{12345}}$</sup>
 </details>
-
 <details id="CODIGOS">
   <summary><h2 style="font-style:italic;">Códigos</h2></summary>
 
