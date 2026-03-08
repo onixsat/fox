@@ -28,7 +28,6 @@
 <h2 style="font-style:italic;">Instalação</h2>
 <h6 style="font-style:italic;">Executar os comandos para instalar o sistema.</h6>
 
-* __Setup__
 ```bash
 # Verificar portas nginx
 sudo apt install net-tools
