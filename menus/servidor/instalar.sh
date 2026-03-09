@@ -86,23 +86,23 @@ log_info "Installing required packages..."
 start_time2=$(date +%s%3N)
 sudo sed -i s/oneiric/precise/ /etc/apt/sources.list
 sudo apt-get -qy update
-DEBIAN_FRONTEND=noninteractive sudo apt-get -qy install ufw net-tools nginx 2>&1 | tee oi.log
+#DEBIAN_FRONTEND=noninteractive sudo apt-get -qy install ufw net-tools nginx 2>&1 | tee oi.log
 
  
-#DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#    ufw \
-#    net-tools \
-#    nginx \
-#    php8.1-fpm \
-#    php8.1-mcrypt \
-#    openssh-server \
-#    dos2unix \
-#    certbot \
-#    python3-certbot-nginx \
-#    git \
-#    iptables-persistent \
-#    fail2ban \
-#    curl
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    ufw \
+    net-tools \
+    nginx \
+    php8.1-fpm \
+    php8.1-mcrypt \
+    openssh-server \
+    dos2unix \
+    certbot \
+    python3-certbot-nginx \
+    git \
+    iptables-persistent \
+    fail2ban \
+    curl
 
 
      end_time2=$(date +%s%3N)
