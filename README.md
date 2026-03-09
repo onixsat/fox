@@ -92,7 +92,7 @@ _Códigos de script básicos para utilização na shell linux._
 * __LOL__\
   *LOL*
 
-  ```bash
+```bash
 Waiting for cache lock: Could not get lock: /var/lib/dpkg/lock-frontend. It is held by process 3399.
 ps -A | grep 3399
 
@@ -121,7 +121,7 @@ sudo apt-get upgrade
 sudo systemctl stop unattended-upgrades.service
 sudo lsof /var/lib/dpkg/lock-frontend
 sudo systemctl stop unattended-upgrades.service
-  ```
+```
 
 </div>
 
