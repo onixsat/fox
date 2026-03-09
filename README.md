@@ -87,6 +87,44 @@ _Ver o script <a href="secure.sh" target="_blank">secure.sh</a>_
 
 _Códigos de script básicos para utilização na shell linux._
 
+<div id="LOL">
+
+* __LOL__\
+  *LOL*
+
+  ```bash
+Waiting for cache lock: Could not get lock: /var/lib/dpkg/lock-frontend. It is held by process 3399.
+ps -A | grep 3399
+
+sudo lsof /var/lib/dpkg/lock
+sudo kill -9 6750
+
+sudo systemctl stop unattended-upgrades.service
+sudo lsof /var/lib/dpkg/lock-frontend
+sudo systemctl stop unattended-upgrades.service
+
+Clear Lock File
+sudo rm /var/lib/dpkg/lock
+sudo rm /var/lib/dpkg/lock-frontend
+sudo rm /var/lib/apt/lists/lock
+#Clear Cache
+sudo rm /var/cache/apt/archives/lock
+
+sudo dpkg --configure -a
+
+sudo systemctl stop unattended-upgrades.service
+sudo lsof /var/lib/dpkg/lock-frontend
+sudo systemctl stop unattended-upgrades.service
+
+sudo apt-get upgrade
+
+sudo systemctl stop unattended-upgrades.service
+sudo lsof /var/lib/dpkg/lock-frontend
+sudo systemctl stop unattended-upgrades.service
+  ```
+
+</div>
+
 <div id="BLOQUEAR">
 
 * __Bloquear__\
