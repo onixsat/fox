@@ -1,5 +1,6 @@
 #!/bin/sh
 globais
+source "$thisFilePath/menus/global1.sh"
 
 read -r -d '' ENV_VAR_MENU << EOM
   Menu ${BLUE}- ${BOLD}${RED}Nginx${NORMAL}
