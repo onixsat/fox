@@ -42,12 +42,10 @@ function resetBashFunctions() {
 }
 function sigint() {
 	echo "sigint"
-	clear
 	exit 0;
 }
 function sair() {
 	echo "sair"
-	clear
 	exit 0;
 }
 function notify() {
