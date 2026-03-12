@@ -1,63 +1,57 @@
 #!/bin/bash
 function globais(){
-  version="1.0.0"
-  WHITE="$(tput setaf 7)"
-  CYAN="$(tput setaf 6)"
-  MAGENTA="$(tput setaf 5)"
-  YELLOW="$(tput setaf 3)"
-  GREEN="$(tput setaf 2)"
-  BLUE="$(tput setaf 4)"
-  RED="$(tput setaf 1)"
-  NORMAL="$(tput sgr0)"
-  BOLD="$(tput bold)"
-  tput init
+version="1.0.0"
+WHITE="$(tput setaf 7)"
+CYAN="$(tput setaf 6)"
+MAGENTA="$(tput setaf 5)"
+YELLOW="$(tput setaf 3)"
+GREEN="$(tput setaf 2)"
+BLUE="$(tput setaf 4)"
+RED="$(tput setaf 1)"
+NORMAL="$(tput sgr0)"
+BOLD="$(tput bold)"
+tput init
 }
 function banner(){
-  tput init
-  data1=$1
-  if [[ $data1 = *[[:digit:]]* ]]; then
-    data1=$1
-    sleep "$data1"
-    var1=$2
-    var2=$3
-    var3=$4
-  else
-    var1=$1
-    var2=$2
-    var3=$3
-  fi
-
-  clear
-
-  if [ -z "$var3" ]
-  then
-    echo -n "${GREEN}                                                         "
-    echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
-  else
-    echo -n ""
-    echo -e "${GREEN}Menu ${var1} ${BLUE}- ${YELLOW}${var2} ${GREEN}> ${BOLD}${RED}${var3}"
-  fi
-
-  echo -n "${NORMAL}"
-  printf "%45s" " " | tr ' ' '-'
-  echo -e "${NORMAL}"
-  echo -n "${NORMAL}"
-  tput init
+tput init
+data1=$1
+if [[ $data1 = *[[:digit:]]* ]]; then
+data1=$1
+sleep "$data1"
+var1=$2
+var2=$3
+var3=$4
+else
+var1=$1
+var2=$2
+var3=$3
+fi
+clear
+if [ -z "$var3" ]; then
+echo -n "${GREEN}                                                         "
+echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
+else
+echo -n ""
+echo -e "${GREEN}Menu ${var1} ${BLUE}- ${YELLOW}${var2} ${GREEN}> ${BOLD}${RED}${var3}"
+fi
+echo -n "${NORMAL}"
+printf "%45s" " " | tr ' ' '-'
+echo -e "${NORMAL}"
+echo -n "${NORMAL}"
+tput init
 }
 function reload(){
-  tput init
-  data1=$1 data2=$2
-	echo -n "Press Enter to $data1"
-	read response
-	loadMenu "$data2"
+tput init
+data1=$1 data2=$2
+echo -n "Press Enter to $data1"
+read response
+loadMenu "$data2"
 }
 function loading(){
-    EraseToEOL=$(tput el)
-    max=$((SECONDS + 3))
-
-    while [ $SECONDS -le ${max} ]
-    do
-        msg='Atualizando'
+EraseToEOL=$(tput el)
+max=$((SECONDS + 3))
+while [ $SECONDS -le ${max} ]; do
+msg='Atualizando'
         for i in {1..4}
         do
             printf "%s" "${msg}"
@@ -66,27 +60,27 @@ function loading(){
         done
         printf "\r${EraseToEOL}"
 
-    done
-    echo -e "\\r${WHITE}Atualizado!"
-    printf "\n"
+done
+echo -e "\\r${WHITE}Atualizado!"
+printf "\n"
 }
 function loading_icon(){
-    local load_interval="${1}"
-    local loading_message="${2}"
-    local elapsed=0
-    local loading_animation=( '—' "\\" 'l' 'X' )
-    echo -n "${WHITE}${loading_message} "
-    tput civis
-    trap "tput cnorm" EXIT
-    while [ "${load_interval}" -ne "${elapsed}" ]; do
-        for frame in "${loading_animation[@]}" ; do
-            printf "%s\b" "${frame}"
-            sleep 0.25
-        done
-        elapsed=$(( elapsed + 1 ))
+local load_interval="${1}"
+local loading_message="${2}"
+local elapsed=0
+local loading_animation=( '—' "\\" 'l' 'X' )
+echo -n "${WHITE}${loading_message} "
+tput civis
+trap "tput cnorm" EXIT
+while [ "${load_interval}" -ne "${elapsed}" ]; do
+    for frame in "${loading_animation[@]}" ; do
+        printf "%s\b" "${frame}"
+        sleep 0.25
     done
-    echo -e "\\r${WHITE}${CHECK_MARK} Atualizado!"
-    printf " \b\n"
+    elapsed=$(( elapsed + 1 ))
+done
+echo -e "\\r${WHITE}${CHECK_MARK} Atualizado!"
+printf " \b\n"
 }
 function clearLastLines(){
     local linesToClear=$1
