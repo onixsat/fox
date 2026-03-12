@@ -8,25 +8,21 @@ EOM
 createMenu "menuNginx" "$ENV_VAR_MENU"
 addMenuItem "menuNginx" "Editar" showEditar
 addMenuItem "menuNginx" "Atualizar" showNovo
-#addMenuItem "menuNginx" "Original" showOriginal
 addMenuItem "menuNginx" "Original" showInativo2
 addMenuItem "menuNginx" "Sub Menu" showSubmenu2
 
 GITHUB="https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/editor/nginx/alterados/etc/nginx/"
-#sudo wget "https://raw.githubusercontent.com/onixsat/linux/refs/heads/main/editor/nginx/alterados/etc/nginx/nginx.conf?raw=True" -O /etc/nginx/nginx.conf &> 1.log &
 getRand(){
     min="${1:-1}"   ## min is the first parameter, or 1 if no parameter is given
     max="${2:-100}" ## max is the second parameter, or 100 if no parameter is given
     rnd_count=$((RANDOM % ( $max - $min + 1 ) + $min )); ## get a random value using /dev/urandom
     echo "$rnd_count"
 }
-function cmd1(){
- 
+function cmd1(){ 
     rnd_count=$((RANDOM % ( 8089 - 8080 + 1 ) + 8080 )); ## get a random value using /dev/urandom
 	ipaddr=$(curl v4.ident.me)
 	sudo ufw allow ${rnd_count}/tcp
 	php -S ${ipaddr}:${rnd_count} >/dev/null 2>&1 &
-
     if [ $? -eq 0 ]; then
 		echo "Server (http://${ipaddr}:${rnd_count}) started"
 		       sleep 10
@@ -37,35 +33,20 @@ function cmd1(){
 		exit 1
     fi
 }
-
 function showEditar(){
-
 	banner "Menu" "Nginx" "Editar"
-	
 	cd $thisFilePath/editor
-	
-	#step "Bloquear arquivos:"
-	#	try sudo chattr +i nginx/originais/lb.conf
-	#	try sudo chattr +i nginx/originais/bo.conf
-	#next
-	
 	step "Ligar localhost:"
 		try cmd1
-	next
-	
+	next	
 	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
-
 	reload "return" "menuNginx"
 	pause
-	
 }
-
 function showNovo(){
-
 	banner "Menu" "Nginx" "Atualizar"
-	
 	step "Backup arquivos /etc/nginx: /home"
-		sudo zip -r -e /home/backup$RANDOM.zip /etc/nginx
+	sudo zip -r -e /home/backup$RANDOM.zip /etc/nginx
 	next
 
 	step "Desbloquear arquivos:"
