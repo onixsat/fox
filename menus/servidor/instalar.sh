@@ -38,7 +38,7 @@ clear
 titulo "Instalar pacotes do sistema..."
 log_info "Installing required packages..."
 start_time2=$(date +%s%3N)
-add "Atualizar" "sudo apt ufw net-tools nginx openssh-server dos2unix certbot python3-certbot-nginx git iptables-persistent php8.3-fpm php8.3-mcrypt curl -y" "1"
+add "Atualizar" "sudo apt ufw net-tools nginx openssh-server dos2unix certbot python3-certbot-nginx git iptables-persistent php8.3-fpm php8.3-mcrypt curl -y"
 end_time2=$(date +%s%3N)
 duration_ms2=$((end_time2 - start_time2))
 echo -e "Execution1: $duration_ms2"
