@@ -116,14 +116,3 @@ function handle_ctrlc()
 }
 main "$@"
 } 2>&1 | tee btk.log
-
-
-
-
-
-
-
-
-
-main "$@"
-} 2>&1 | tee btk.log
