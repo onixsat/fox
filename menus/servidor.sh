@@ -6,7 +6,7 @@ read -r -d '' ENV_VAR_MENU << EOM
 EOM
 createMenu "menuServidor" "$ENV_VAR_MENU"
 addMenuItem "menuServidor" "Iniciar" showInativo "Iniciar"
-addMenuItem "menuServidor" "Instalar" showInativo "Instalar"
+addMenuItem "menuServidor" "Instalar" showInstalar2 "Instalar"
 addMenuItem "menuServidor" "Configuracao" loadMenu "menuConfig"
 
 source menus/servidor/config.sh
@@ -28,3 +28,4 @@ esperar "sleep 2" "Verificando..." " ${WHITE} Esta opção está inátiva"
 reload "return" "menuServidor"
 pause
 }
+
