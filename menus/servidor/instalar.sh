@@ -39,8 +39,7 @@ titulo "Instalar pacotes do sistema..."
 log_info "Installing required packages..."
 start_time2=$(date +%s%3N)
 
-sudo dpkg --configure -a
-sudo apt install ufw net-tools nginx openssh-server dos2unix certbot python3-certbot-nginx git iptables-persistent php8.3-fpm php8.3-mcrypt curl
+sudo apt install ufw net-tools nginx openssh-server certbot python3-certbot-nginx iptables-persistent php8.3-cli php8.3-fpm php8.3-mcrypt curl
 
 end_time2=$(date +%s%3N)
 duration_ms2=$((end_time2 - start_time2))
