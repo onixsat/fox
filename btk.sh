@@ -1,5 +1,4 @@
 #!/bin/bash
-{
 thisFilePath="$( dirname "${BASH_SOURCE[0]}" )"
 source "$thisFilePath/config/pathUtils.sh"
 source "$thisFilePath/config/functions.sh"
@@ -113,4 +112,3 @@ function handle_ctrlc()
     fi
 }
 main "$@"
-} 2>&1 | tee btk.log
