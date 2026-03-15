@@ -1,10 +1,20 @@
-#!/bin/sh
-
-sudo rm class.sh
-
+#!/bin/bash
+sudo rm -R class.sh
 wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/class.sh
-
 source class.sh
+
+log_info "Updating package lists and upgrading system..."
+add "Atualizar" "sudo apt update -y" "1"
+add "Atualizar" "sudo apt upgrade -y" "1"
+read -n 1 -s -p "Press any key to continue 1"
+clear
+
+titulo "Instalar pacotes do sistema..."
+
+
+read -n 1 -s -p "Press any key to continue 3"
+echo ""
+
 
 #titulo "Atualizando1..."
 #read -n 1 -s -p "Press any key to continue 1"
