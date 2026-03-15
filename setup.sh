@@ -1,10 +1,11 @@
 #!/bin/sh
 
 sudo rm class.sh
+
 wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/class.sh
+
 source class.sh
 
-# Install net-tools for networking utilities
 titulo "Atualizando1..."
 read -n 1 -s -p "Press any key to continue 1"
 echo ""
