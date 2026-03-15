@@ -1,26 +1,21 @@
 #!/bin/sh
 
-if [ -d "class.sh" ]; then
-    sudo rm class.sh
-fi
-
+sudo rm class.sh
 wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/class.sh
-
 source class.sh
 
 # Install net-tools for networking utilities
-titulo "Configuring iptables..."
-log_info "Configuring UFW..."
-
-step "Bloquear arquivos:"
+titulo "Atualizando1..."
+sleep 5
+log_info "Atualizando2..."
+sleep 5
+step "Atualizando3:"
   	try sudo apt update
 next
 
-esperar2 "sleep 5" "Configurando..." " ${WHITE} Configurado!"
+esperar2 "sleep 5" "Atualizando..." " ${WHITE} Atualizado!"
 
-# User pause 1
-read -n 1 -s -p "Press any key to continue 0"
-echo ""
+
 
 # Install the primary software stack
 # Note: Ensure the PHP 8.3 repository is added if your distribution does not include it by default.
