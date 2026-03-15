@@ -6,19 +6,19 @@ wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/class.sh
 
 source class.sh
 
-titulo "Atualizando1..."
-read -n 1 -s -p "Press any key to continue 1"
-echo ""
+#titulo "Atualizando1..."
+#read -n 1 -s -p "Press any key to continue 1"
+#echo ""
 
 log_info "Atualizando2..."
 read -n 1 -s -p "Press any key to continue 2"
 echo ""
 
-step "Atualizando3:"
-  	try sudo apt update
-next
+#step "Atualizando3:"
+#  	try sudo apt update
+#next
 
-#esperar2 "sleep 5" "Atualizando..." " ${WHITE} Atualizado!"
+esperar2 "ls" "Atualizando..." " ${WHITE} Atualizado!"
 
 
 
