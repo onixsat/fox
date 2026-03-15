@@ -6,9 +6,13 @@ source class.sh
 
 # Install net-tools for networking utilities
 titulo "Atualizando1..."
-sleep 5
+read -n 1 -s -p "Press any key to continue 1"
+echo ""
+
 log_info "Atualizando2..."
-sleep 5
+read -n 1 -s -p "Press any key to continue 2"
+echo ""
+
 step "Atualizando3:"
   	try sudo apt update
 next
