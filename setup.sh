@@ -18,7 +18,7 @@ step "Atualizando3:"
   	try sudo apt update
 next
 
-esperar2 "sleep 5" "Atualizando..." " ${WHITE} Atualizado!"
+#esperar2 "sleep 5" "Atualizando..." " ${WHITE} Atualizado!"
 
 
 
@@ -78,7 +78,7 @@ sudo iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT
 sudo iptables -I INPUT 1 -p tcp --dport 8443 -j ACCEPT
 sudo iptables -I INPUT 1 -p tcp --dport 9000 -j ACCEPT
 
-esperar2 "sleep 5" "Configurando..." " ${WHITE} Configurado!"
+#esperar2 "sleep 5" "Configurando..." " ${WHITE} Configurado!"
 
 read -n 1 -s -p "Press any key to continue 4"
 clear
