@@ -27,7 +27,20 @@ echo ""
 
 # Install the primary software stack
 # Note: Ensure the PHP 8.3 repository is added if your distribution does not include it by default.
-sudo apt install -y ufw net-tools nginx openssh-server certbot python3-certbot-nginx iptables-persistent php8.3-cli php8.3-fpm php8.3-mcrypt curl
+sudo apt install -y ufw
+sudo apt install -y net-tools
+sudo apt install -y nginx
+sudo apt install -y openssh-server
+sudo apt install -y certbot
+sudo apt install -y python3-certbot-nginx
+sudo apt install -y php8.3-cli
+sudo apt install -y php8.3-fpm
+sudo apt install -y php8.3-mcrypt
+sudo apt install -y curl
+sudo apt install -y git
+sudo apt install -y nano
+sudo apt install -y wget
+sudo apt install -y dos2unix
 
 # User pause 2
 read -n 1 -s -p "Press any key to continue 2"
@@ -38,13 +51,6 @@ sudo apt update -y
 
 # User pause 3
 read -n 1 -s -p "Press any key to continue 3"
-echo ""
-
-# Install essential command-line tools
-sudo apt install -y git nano wget dos2unix
-
-# User pause 4
-read -n 1 -s -p "Press any key to continue 4"
 echo ""
 
 # Clone the target repository. If it exists, we remove it first to ensure a clean clone.
