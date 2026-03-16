@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# wget https://gist.githubusercontent.com/j3rr7/d94a21d262767a50ead6f6fb60eb3bf6/raw/f9c65edac9c16463de8a23d429b52af008241843/install.sh
+
+
+
 # Exit immediately if a command exits with a non-zero status,
 # if an undefined variable is used, or if a pipe fails.
 set -euo pipefail
