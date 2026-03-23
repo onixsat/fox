@@ -107,6 +107,7 @@ sudo apt-get install -y npm --allow-unauthenticated
 #sudo chown -R username /var/www/app
 sudo chown -R www-data /var/www
  sudo chmod -R 777 /var/www/html
+sudo chmod -R 777 /var/www/html/public/*
 
 echo "--- Restarting php7.4-fpm and Nginx ---"
 sudo /etc/init.d/nginx restart
