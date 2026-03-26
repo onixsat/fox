@@ -26,7 +26,7 @@ install_php_env() {    echo "Fetching and executing PHP setup script..."
 }
 
 setup_web_root() {
-    local target_dir="/var/www/html"
+    local target_dir="/var/www/html/public"
     echo "Configuring web root at $target_dir..."
     
     mkdir -p "$target_dir"
