@@ -14,6 +14,7 @@ fi
 update_system() {
     echo "Updating and upgrading system packages..."
     apt update && apt upgrade -y
+    apt install unzip
 }
 
 install_php_env() {    echo "Fetching and executing PHP setup script..."
@@ -33,10 +34,11 @@ setup_web_root() {
     cd "$target_dir"
     
     # Create index.php with content
-    echo "index" > index.php
+    echo "var/www/html/public/index.php" > index.php
     
     # Set appropriate permissions (Best Practice)
     chown -R www-data:www-data "$target_dir"
+    chmod -R 777 "$target_dir"
 }
 
 # --- Execution ---
