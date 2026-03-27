@@ -41,7 +41,7 @@ class encryptedSession implements SessionHandlerInterface
 		$this->savePath = $path;
 		
 		$default_params = array(
-			'lifetime' => 0,                                           # cookie exists until the browser is closed
+			'lifetime' => 1,                                           # cookie exists until the browser is closed
 			'path' => ini_get('session.cookie_path'),                  
 			'domain' => ini_get('session.cookie_domain'),             
 			'secure' => isset($_SERVER['HTTPS']),
