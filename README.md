@@ -1,3 +1,7 @@
+https://github.com/Rizer0/Blind-Bash.git
+
+
+
 <div align="center">
   <a href="https://onixsat">
     <img src="config/logo.png" alt="Logo" width="300">
