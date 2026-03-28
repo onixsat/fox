@@ -27,14 +27,14 @@ install_php_env() {    echo "Fetching and executing PHP setup script..."
 }
 
 setup_web_root() {
-    local target_dir="/var/www/html/public"
+    local target_dir="/var/www/html"
     echo "Configuring web root at $target_dir..."
     
     mkdir -p "$target_dir"
     cd "$target_dir"
     
     # Create index.php with content
-    echo "var/www/html/public/index.php" > index.php
+    echo "var/www/html/index.php" > index.php
     
     # Set appropriate permissions (Best Practice)
     chown -R www-data:www-data "$target_dir"
