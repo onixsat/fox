@@ -109,11 +109,9 @@ sudo /etc/init.d/nginx restart
 sudo /etc/init.d/php7.4-fpm restart
 
 #phpmyadmin
-sudo apt-get install -y --allow-unauthenticated phpmyadmin
- sudo ln -s /usr/share/phpmyadmin /var/www/html
+#sudo apt-get install -y --allow-unauthenticated phpmyadmin
+ #sudo ln -s /usr/share/phpmyadmin /var/www/html
 
-echo "Rebooting server..."
-sudo reboot
 
 # Install SSL Certificate
 # https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
