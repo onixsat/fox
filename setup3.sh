@@ -46,8 +46,10 @@ setup_web_root
 
 echo "Automation completed successfully."
 
+if [ -e "class.sh" ]; then
+    sudo rm -R class.sh
+fi
 
-sudo rm -R class.sh
 wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/class.sh
 source class.sh
 
