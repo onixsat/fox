@@ -51,26 +51,21 @@ sudo systemctl enable php7.4-fpm.service
 
 # Create folder
 sudo mkdir -p /var/www/html
-sudo mkdir -p /var/www/html/public
+#sudo mkdir -p /var/www/html/public
 
 echo "--- Configuring default Nginx site to support Laravel ---"
 cat << 'EOF' | sudo tee /etc/nginx/sites-available/default
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server ipv6only=on;
+        listen 8080 default_server;
+        listen [::]:8080 default_server ipv6only=on;
 
-        root /var/www/html/public;
+        root /var/www/html;
         index index.php index.html index.htm;
-
-        # Make site accessible from http://localhost/
-        server_name localhost;
+        
+        server_name _;
 
         location / {
-                # First attempt to serve request as file, then
-                # as directory, then fall back to displaying a 404.
                 try_files $uri $uri/ /index.php?$query_string;
-                # Uncomment to enable naxsi on this location
-                # include /etc/nginx/naxsi.rules
         }
         location ~ \.php$ {
                 try_files $uri =404;
@@ -107,7 +102,7 @@ sudo apt-get install -y npm --allow-unauthenticated
 #sudo chown -R username /var/www/app
 sudo chown -R www-data /var/www
  sudo chmod -R 777 /var/www/html
-sudo chmod -R 777 /var/www/html/public/*
+sudo chmod -R 777 /var/www/html/*
 
 echo "--- Restarting php7.4-fpm and Nginx ---"
 sudo /etc/init.d/nginx restart
@@ -115,7 +110,7 @@ sudo /etc/init.d/php7.4-fpm restart
 
 #phpmyadmin
 sudo apt-get install -y --allow-unauthenticated phpmyadmin
- sudo ln -s /usr/share/phpmyadmin /var/www/html/public
+ sudo ln -s /usr/share/phpmyadmin /var/www/html
 
 echo "Rebooting server..."
 sudo reboot
