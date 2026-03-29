@@ -14,8 +14,9 @@ source "$thisFilePath/menus/global1.sh"
 source menus/servidor/config.sh
 
 function showLoad(){
-banner "Servidor" "$1" "load"
 if @confirm 'Confirma que quer continuar?' ; then
+	clear
+	banner "Servidor" "$1" "load"
 	source menus/servidor/load.sh	
 else
 echo "No"
