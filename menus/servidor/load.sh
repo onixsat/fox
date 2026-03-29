@@ -36,7 +36,7 @@ function executar() {
 	arg1=$1
 	arg2=$2
 	step "${arg1}"
-		try ${arg2}
+		try ${arg2} >/dev/null 2>&1 &
 	next
 }
 function cmd1() {
@@ -60,7 +60,7 @@ echo ""
 
 step "Step3: "
 try cmd1
-try cmd1
+try app_1
 next
 
 preloading "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
