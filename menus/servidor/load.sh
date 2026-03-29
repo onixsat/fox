@@ -28,21 +28,29 @@ function esperar2(){
   read -n 1 -s -p "Press any key to continue 0"
   clear
 }
+function cmd0(){ 
+    echo "texto"
+	sleep 5
+	return 0
+}
 clear
 
 esperar "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
 read -n 1 -s -p "Press 01"
 echo ""
+clear
 
 esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2!"
 read -n 1 -s -p "Press 02"
 echo ""
+clear
 
 step "Ligar:"
-		try apt update-y
+		try cmd0
 next
 read -n 1 -s -p "Press 03"
 echo ""
+clear 
 
 esperar "sleep 5" "ligando..." " ${WHITE} Ligado!"
 read -n 1 -s -p "Press 04"
