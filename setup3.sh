@@ -195,7 +195,6 @@ function esperar2(){
 }
 
 
-
 # --- Functions ---
 update_system() {
     log_info "Updating and upgrading system packages..."
