@@ -1,5 +1,5 @@
 ```bash
-wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/setup3.sh && chmod +x setup3.sh && bash setup3.sh
+wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/setup5.sh && chmod +x setup5.sh && bash setup5.sh
 ```
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
