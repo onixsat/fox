@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 function executar() {
 	arg1=$1
 	arg2=$2
@@ -8,7 +7,7 @@ function executar() {
 	next
 }
 function app_0() {
-    sudo apt update -mm
+    sudo apt update -y
     sudo apt upgrade -y
 }
 
@@ -24,4 +23,4 @@ executar "Step0: " "app_0"
 executar "Step1: " "app_1"
 executar "Step2: " "app_2"
 
-echo "${CINZA}Processos realizados em $GLOBAL_TIME segundos"
+#echo "${CINZA}Processos realizados em $GLOBAL_TIME segundos"
