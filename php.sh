@@ -14,21 +14,21 @@ sudo add-apt-repository ppa:ondrej/nginx
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
 
-echo "--- Installing text editor NANO ---"
-sudo apt-get install -y nano
+#echo "--- Installing text editor NANO ---"
+#sudo apt-get install -y nano
 
-echo "--- Installing git ---"
-sudo apt-get install -y git-core
+#echo "--- Installing git ---"
+#sudo apt-get install -y git-core
 
-echo "--- Installing MySQL ---"
-sudo apt-get update
-sudo apt-get install -y mysql-server
-sudo mysql_secure_installation
+#echo "--- Installing MySQL ---"
+#sudo apt-get update
+#sudo apt-get install -y mysql-server
+#sudo mysql_secure_installation
 # https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
 
 
 echo "--- Installing PHP-specific packages and Curl ---"
-sudo apt-get -y install nginx php7.4 php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-mysql php7.4-fpm php7.4-ldap php7.4-tidy php7.4-bcmath php7.4-mbstring php7.4-xml php7.4-curl php7.4-zip php7.4-gd php7.4-sqlite3 php7.4-redis --allow-unauthenticated
+sudo apt install -y php7.4 php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-mysql php7.4-fpm php7.4-ldap php7.4-tidy php7.4-bcmath php7.4-mbstring php7.4-xml php7.4-curl php7.4-zip php7.4-gd php7.4-sqlite3 php7.4-redis --allow-unauthenticated
 
 echo "--- Applying modifications to php7.4-fpm ---"
 sudo sed -i '/cgi.fix_pathinfo=1/c cgi.fix_pathinfo=0' /etc/php/7.4/cli/php.ini
@@ -115,10 +115,10 @@ sudo /etc/init.d/php7.4-fpm restart
 
 # Install SSL Certificate
 # https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install python-certbot-nginx
-sudo certbot --nginx -d host.ospro.pt -d www.ospro.pt
+#sudo add-apt-repository ppa:certbot/certbot
+#sudo apt-get update
+#sudo apt-get install python-certbot-nginx
+#sudo certbot --nginx -d host.ospro.pt -d www.ospro.pt
 
 # Set up subdomain
 #https://hackprogramming.com/how-to-setup-subdomain-or-host-multiple-domains-using-nginx-in-linux-server/
