@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+##!/usr/bin/env bash
 # curl -LO https://gist.githubusercontent.com/mannysoft/e4b54662b3aec5c0b1b88be52177ab68/raw/04dba433394c7a03d891f94c75b52975d2e7a621/install.sh
 # chmod +x install.sh
 # ./install.sh
@@ -127,10 +127,10 @@ sudo certbot --nginx -d host.ospro.pt -d www.ospro.pt
 # https://mannyisles.com/install-mailhog-with-nginx-on-ubuntu-server/
 
 # Install supervisor
-sudo apt-get install supervisor -y
+#sudo apt-get install supervisor -y
 
 # https://laravel.com/docs/7.x/queues#running-the-queue-worker
 
 # MongoDB
 # https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
-sudo apt-get install php-mongodb
+#sudo apt-get install php-mongodb
