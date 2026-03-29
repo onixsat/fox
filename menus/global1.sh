@@ -46,8 +46,9 @@ function add(){
     next
     
     end_time2=$(date +%s%3N)
-    duration_ms2=$((end_time2 - start_time2))
-    global GLOBAL_TIME=${duration_ms2}
+    GLOBAL_TIME=$((end_time2 - start_time2))
+    #GLOBAL_TIME=${duration_ms2}
+    export GLOBAL_TIME
     #echo -e "Execution: $duration_ms2"
     #esperar "sleep 2" "Aguardar..." " ${WHITE} Terminado em $duration_ms2"
     return 0
