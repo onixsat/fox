@@ -30,17 +30,24 @@ function esperar2(){
   echo ""
   clear
 }
+
+function cmd1() {
+    log_info "Updating and upgrading system packages..."
+    echo "666"
+    sudo apt update -y
+    sudo apt upgrade -y
+}
+
 function cmd0(){ 
-    echo -e "texto"
+    echo -n "texto"
 	sleep 3
-	
 }
 clear
 
 log_info "Instalar..."
 step "Step1:"
 	try cmd0
-	try cmd0
+	try cmd1
 next	
 	
 esperar "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
