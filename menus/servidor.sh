@@ -10,6 +10,7 @@ addMenuItem "menuServidor" "Instalar" showInstalar2 "Instalar"
 addMenuItem "menuServidor" "Load" showLoad "Load"
 addMenuItem "menuServidor" "Configuracao" loadMenu "menuConfig"
 
+source "$thisFilePath/menus/global1.sh"
 source menus/servidor/config.sh
 
 function showLoad(){
