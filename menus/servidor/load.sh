@@ -32,47 +32,35 @@ function preloading(){
   unset GLOBAL_TIME
   unset start_time2
 }
-
+function executar() {
+	arg1=$1
+	arg2=$2
+	step "${arg1}"
+		try ${arg2}
+	next
+}
 function cmd1() {
-#    echo -n "Updating1..."
     sudo apt update -y >/dev/null 2>&1 &
     sudo apt upgrade -y >/dev/null 2>&1 &
-#sleep 5
-#echo -e ""
 }
-
-function cmd0(){ 
-#echo ""
- #   echo -n "Updating0..."
-#	sudo apt upgrade -y >/dev/null 2>&1 &
-#echo -e ""
-sleep 2
+function app_1(){
+  ufw allow 22
+  ufw allow 80/tcp 
 }
-function app_ufw(){
-ufw allow 22
-ufw allow 80/tcp 
-ufw allow 443/tcp 
-ufw allow 21/tcp 
-ufw allow 8080/tcp 
-ufw allow 8443/tcp 
-ufw allow 9000/tcp 
-ufw allow 'Nginx Full'
-ufw allow OpenSSH
-ufw --force enable
+function app_2(){
+  ufw allow 443/tcp 
 }
 
 log_info "Instalar..."
-step "Step0: "
-try cmd0
-next
+executar "Step1: " "cmd1"
+executar "Configuring UFW: " "app_ufw"
 
-step "Step1: "
-try cmd0
+read -n 1 -s -p "Press any key to continue 0"
+echo ""
+
+step "Step2: "
 try cmd1
-next
-
-step "Configuring UFW: "
-try app_ufw
+try cmd1
 next
 
 preloading "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
