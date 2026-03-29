@@ -36,24 +36,15 @@ function cmd0(){
 }
 clear
 
-step "Ligar1:"
-		try cmd0
-next
-
-step "Ligar2:"
-		try cmd0
-next
-esperar2 "sleep 5" "In1..." " ${WHITE} In2!"
 
 
 
 
 
 
-
-log_info "Instalar pacotes do sistema..."
+log_info "Instalar1..."
 add "Atualizar" "sudo apt update -y" "1"
-esperar2 "sleep 5" "Instalando19..." " ${WHITE} Instalado19!"
+esperar2 "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
 
 
 log_info "Installing required packages..."
