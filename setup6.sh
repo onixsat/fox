@@ -218,9 +218,7 @@ echo ""
 install_php_env() {    echo "Fetching and executing PHP setup script..."
     
 }
-setup_web_root() {
-    
-}
+
 conf_ufw() {
 echo "Configuring UFW..."
 
@@ -246,7 +244,6 @@ install_all
 
 install_php_env
 
-setup_web_root
 
 conf_ufw
 
