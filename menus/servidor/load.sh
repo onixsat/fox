@@ -30,10 +30,31 @@ function esperar2(){
 }
 clear
 
+esperar "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
+read -n 1 -s -p "Press 01"
+echo ""
+
+esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2!"
+read -n 1 -s -p "Press 02"
+echo ""
+
+step "Ligar:"
+		try apt update-y
+next
+read -n 1 -s -p "Press 03"
+echo ""
+
+esperar "sleep 5" "ligando..." " ${WHITE} Ligado!"
+read -n 1 -s -p "Press 04"
+echo ""
+
+esperar2 "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
+read -n 1 -s -p "Press 05"
+echo ""
+
+
 log_info "Instalar pacotes do sistema..."
 add "Atualizar" "sudo apt update -y" "1"
-#read -n 1 -s -p "Press 1"
-#echo ""
 esperar2 "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
 
 
@@ -42,5 +63,7 @@ start_time2=$(date +%s%3N)
 add "Atualizar" "sudo apt upgrade -y" "1"
 end_time2=$(date +%s%3N)
 duration_ms2=$((end_time2 - start_time2))
-echo -e "Execution1: $duration_ms2"
-esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2!"
+esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2! em $duration_ms2"
+
+read -n 1 -s -p "Press final"
+echo ""
