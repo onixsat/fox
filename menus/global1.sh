@@ -109,9 +109,16 @@ echo_warning() {
     return 1
 } 
 step() {
-start_time2=$(date +%s%3N)
-export start_time2
-    
+
+if [ -v start_time2 ];then
+    #echo "Variable is set"
+    start_time2=$((start_time2))
+    export start_time2
+else
+    #echo "Variable is not set"
+    start_time2=$(date +%s%3N)
+    export start_time2
+fi   
     echo -n "$@"
     STEP_OK=0
     [[ -w /tmp ]] && echo $STEP_OK > /tmp/step.$$
@@ -142,12 +149,22 @@ try() {
 }
 next() {
 
+
+#if [ -v k ];then
+#    echo "Variable is set"
+#    TOTAL_FILES=$((FILES_ETC+FILES_VAR))
+#else
+#    echo "Variable is not set"
+
+
+
     end_time2=$(date +%s%3N)
     GLOBAL_TIME=$((end_time2 - start_time2))
     export GLOBAL_TIME
     #echo "1 $end_time2"
     #echo "2 $GLOBAL_TIME"
-
+    
+#fi
     
     [[ -f /tmp/step.$$ ]] && { STEP_OK=$(< /tmp/step.$$); rm -f /tmp/step.$$; }
     [[ $STEP_OK -eq 0 ]]  && echo_success || echo_failure
