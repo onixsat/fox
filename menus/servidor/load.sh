@@ -44,15 +44,12 @@ clear
 
 log_info "Instalar1..."
 add "Atualizar" "sudo apt update -y" "1"
-esperar2 "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
+esperar "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
 
 
 log_info "Installing required packages..."
-start_time2=$(date +%s%3N)
 add "Atualizar" "sudo apt upgrade -y" "1"
-end_time2=$(date +%s%3N)
-duration_ms2=$((end_time2 - start_time2))
-esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2! em $duration_ms2"
+esperar2 "sleep 10" "Instalando2..." " ${WHITE} Instalado2! em ${GLOBAL_TIME}"
 
 read -n 1 -s -p "Press final"
 echo ""
