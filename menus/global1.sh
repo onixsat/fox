@@ -145,8 +145,8 @@ next() {
     end_time2=$(date +%s%3N)
     GLOBAL_TIME=$((end_time2 - start_time2))
     export GLOBAL_TIME
-    echo "1 $end_time2"
-    echo "2 $GLOBAL_TIME"
+    #echo "1 $end_time2"
+    #echo "2 $GLOBAL_TIME"
 
     
     [[ -f /tmp/step.$$ ]] && { STEP_OK=$(< /tmp/step.$$); rm -f /tmp/step.$$; }
