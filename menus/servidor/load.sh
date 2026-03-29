@@ -40,8 +40,8 @@ function executar() {
 	next
 }
 function cmd1() {
-    sudo apt update -y >/dev/null 2>&1 &
-    sudo apt upgrade -y >/dev/null 2>&1 &
+    sudo apt update -y
+    sudo apt upgrade -y
 }
 function app_1(){
   ufw allow 22
