@@ -20,6 +20,21 @@ BLUE="$(tput setaf 4)"
 RED="$(tput setaf 1)"
 NORMAL="$(tput sgr0)"
 BOLD="$(tput bold)"
+
+RED2='\033[0;31m'
+GREEN2='\033[0;32m'
+YELLOW2='\033[1;33m'
+NC='\033[0m'
+
+
+BOOTUP=color
+RES_COL=60
+MOVE_TO_COL="echo -en \\033[${RES_COL}G"
+SETCOLOR_SUCCESS="echo -en \\033[1;32m"
+SETCOLOR_FAILURE="echo -en \\033[1;31m"
+SETCOLOR_WARNING="echo -en \\033[1;33m"
+SETCOLOR_NORMAL="echo -en \\033[0;39m"
+
 tput init
 }
 
@@ -35,10 +50,6 @@ function titulo(){
   tput init
 }
 
-RED2='\033[0;31m'
-GREEN2='\033[0;32m'
-YELLOW2='\033[1;33m'
-NC='\033[0m'
 log_info() {
     echo -e "${GREEN2}[INFO]${NC} $1"
 }
@@ -49,13 +60,6 @@ log_error() {
     echo -e "${RED2}[ERROR]${NC} $1" >&2
 }
 
-BOOTUP=color
-RES_COL=60
-MOVE_TO_COL="echo -en \\033[${RES_COL}G"
-SETCOLOR_SUCCESS="echo -en \\033[1;32m"
-SETCOLOR_FAILURE="echo -en \\033[1;31m"
-SETCOLOR_WARNING="echo -en \\033[1;33m"
-SETCOLOR_NORMAL="echo -en \\033[0;39m"
 
 function add(){
     start_time2=$(date +%s%3N)
@@ -234,7 +238,7 @@ setup_web_root() {
     chmod -R 777 "$target_dir"
 }
 ufw() {
-log_info "Configuring UFW..."
+echo "Configuring UFW..."
 ufw allow 22
 ufw allow 80/tcp 
 ufw allow 443/tcp 
@@ -273,7 +277,9 @@ install
 install_php_env
 
 setup_web_root
+
 ufw
+
 iptables
 
 echo "Automation completed successfully."
