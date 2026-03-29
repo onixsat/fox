@@ -52,13 +52,13 @@ function app_2(){
 }
 
 log_info "Instalar..."
-executar "Step1: " "cmd1"
-executar "Configuring UFW: " "app_ufw"
+executar "Step1: " "app_1"
+executar "Step2: " "app_2"
 
 read -n 1 -s -p "Press any key to continue 0"
 echo ""
 
-step "Step2: "
+step "Step3: "
 try cmd1
 try cmd1
 next
