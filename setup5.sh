@@ -209,7 +209,7 @@ update_system() {
 read -n 1 -s -p "Press any key to continue 1"
 echo ""
 }
-install() {
+install_all() {
     titulo "Instalar pacotes do sistema..."
     sudo apt install -y unzip dos2unix wget nano git curl ufw net-tools nginx openssh-server certbot
     #sudo apt install -y php7.4 php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-mysql php7.4-fpm php7.4-ldap php7.4-tidy php7.4-bcmath php7.4-mbstring php7.4-xml php7.4-curl php7.4-zip php7.4-gd php7.4-sqlite3 php7.4-redis --allow-unauthenticated
@@ -237,7 +237,7 @@ setup_web_root() {
     chown -R www-data:www-data "$target_dir"
     chmod -R 777 "$target_dir"
 }
-ufw() {
+conf_ufw() {
 echo "Configuring UFW..."
 ufw allow 22
 ufw allow 80/tcp 
@@ -254,7 +254,7 @@ read -n 1 -s -p "Press any key to continue 00"
 esperar2 "ls" "Atualizando..." " ${WHITE} Atualizado!"
 clear
 }
-iptables() {
+conf_iptables() {
   titulo "Configuring iptables..."
 sudo iptables -I INPUT 1 -p tcp --dport 21 -j ACCEPT
 sudo iptables -I INPUT 1 -p tcp --dport 22 -j ACCEPT
@@ -272,15 +272,15 @@ sudo iptables -I INPUT 1 -p tcp --dport 9000 -j ACCEPT
 # --- Execution ---
 update_system
 
-install
+install_all
 
 install_php_env
 
 setup_web_root
 
-ufw
+conf_ufw
 
-iptables
+conf_iptables
 
 echo "Automation completed successfully."
 
