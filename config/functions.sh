@@ -118,6 +118,14 @@ function esperar(){
 
   echo -e "\b\\r${CHECK_MARK}${CINZA} ${done}!   "
   echo -e ""
+
+  if [ -v GLOBAL_TIME ];then
+  	unset GLOBAL_TIME
+  fi
+  
+  if [ -v start_time2 ];then
+  	unset start_time2
+  fi
 }
 function titulo(){
   tput init
