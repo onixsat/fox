@@ -109,6 +109,9 @@ echo_warning() {
     return 1
 } 
 step() {
+start_time2=$(date +%s%3N)
+export start_time2
+    
     echo -n "$@"
     STEP_OK=0
     [[ -w /tmp ]] && echo $STEP_OK > /tmp/step.$$
@@ -138,6 +141,14 @@ try() {
     return $EXIT_CODE
 }
 next() {
+
+    end_time2=$(date +%s%3N)
+    GLOBAL_TIME=$((end_time2 - start_time2))
+    export GLOBAL_TIME
+    echo "1 $end_time2"
+    echo "2 $GLOBAL_TIME"
+
+    
     [[ -f /tmp/step.$$ ]] && { STEP_OK=$(< /tmp/step.$$); rm -f /tmp/step.$$; }
     [[ $STEP_OK -eq 0 ]]  && echo_success || echo_failure
     echo
