@@ -24,4 +24,4 @@ executar "Step0: " "app_0"
 executar "Step1: " "app_1"
 executar "Step2: " "app_2"
 
-echo " ${WHITE} Instalado em $GLOBAL_TIME"
+echo "${CINZA}Processos realizados em $GLOBAL_TIME segundos"
