@@ -20,7 +20,7 @@ if @confirm 'Confirma que quer continuar?' ; then
 else
 echo "No"
 fi
-esperar "sleep 2" "Verificando..." " ${WHITE} Verificado"
+esperar "sleep 2" "Verificando..." " ${WHITE} Verificado! ${CINZA}Processos realizados em $GLOBAL_TIME segundos"
 reload "return" "menuServidor"
 pause
 }
