@@ -7,9 +7,22 @@ EOM
 createMenu "menuServidor" "$ENV_VAR_MENU"
 addMenuItem "menuServidor" "Iniciar" showInativo "Iniciar"
 addMenuItem "menuServidor" "Instalar" showInstalar2 "Instalar"
+addMenuItem "menuServidor" "Load" showLoad "Load"
 addMenuItem "menuServidor" "Configuracao" loadMenu "menuConfig"
 
 source menus/servidor/config.sh
+
+function showLoad(){
+banner "Servidor" "$1" "load"
+if @confirm 'Confirma que quer continuar?' ; then
+source menus/servidor/load.sh
+else
+echo "No"
+fi
+esperar "sleep 2" "Verificando..." " ${WHITE} PPPPPPPPPPP"
+reload "return" "menuServidor"
+pause
+}
 
 function showInstalar2(){
 banner "Servidor" "$1" "Instalar"
