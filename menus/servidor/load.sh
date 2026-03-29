@@ -25,45 +25,35 @@ function esperar2(){
   done
   echo -e "\b\\r${CHECK_MARK}${CINZA} ${done}!   "
   echo -e ""
-  read -n 1 -s -p "Press any key to continue 0"
+  read -n 1 -s -p "Press any key to continue."
+  echo ""
   clear
 }
 function cmd0(){ 
     echo "texto"
 	sleep 5
-	return 0
+	
 }
 clear
 
-esperar "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
-read -n 1 -s -p "Press 01"
-echo ""
-clear
-
-esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2!"
-read -n 1 -s -p "Press 02"
-echo ""
-clear
-
-step "Ligar:"
+step "Ligar1:"
 		try cmd0
 next
-read -n 1 -s -p "Press 03"
-echo ""
-clear 
 
-esperar "sleep 5" "ligando..." " ${WHITE} Ligado!"
-read -n 1 -s -p "Press 04"
-echo ""
+step "Ligar2:"
+		try cmd0
+next
+esperar2 "sleep 5" "In1..." " ${WHITE} In2!"
 
-esperar2 "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
-read -n 1 -s -p "Press 05"
-echo ""
+
+
+
+
 
 
 log_info "Instalar pacotes do sistema..."
 add "Atualizar" "sudo apt update -y" "1"
-esperar2 "sleep 5" "Instalando1..." " ${WHITE} Instalado1!"
+esperar2 "sleep 5" "Instalando19..." " ${WHITE} Instalado19!"
 
 
 log_info "Installing required packages..."
