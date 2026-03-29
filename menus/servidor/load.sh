@@ -28,6 +28,7 @@ function esperar2(){
   read -n 1 -s -p "Press any key to continue 0"
   clear
 }
+clear
 
 log_info "Instalar pacotes do sistema..."
 add "Atualizar" "sudo apt update -y" "1"
@@ -42,5 +43,4 @@ add "Atualizar" "sudo apt upgrade -y" "1"
 end_time2=$(date +%s%3N)
 duration_ms2=$((end_time2 - start_time2))
 echo -e "Execution1: $duration_ms2"
-sleep 5
-esperar2 "sleep 5" "Instalando..." " ${WHITE} Instalado!"
+esperar2 "sleep 5" "Instalando2..." " ${WHITE} Instalado2!"
