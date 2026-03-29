@@ -7,6 +7,7 @@ function executar() {
 		try ${arg2} >/dev/null 2>&1 &
 	next
 }
+
 function app_0() {
     sudo apt update -mm
     sudo apt upgrade -y
