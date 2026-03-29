@@ -39,12 +39,11 @@ function executar() {
 		try ${arg2} >/dev/null 2>&1 &
 	next
 }
-function cmd1() {
+function app_0() {
     sudo apt update -y
     sudo apt upgrade -y
 }
 function app_1(){
-  ufw allow 22
   ufw allow 80/tcp 
 }
 function app_2(){
@@ -52,15 +51,8 @@ function app_2(){
 }
 
 log_info "Instalar..."
+executar "Step0: " "app_0"
 executar "Step1: " "app_1"
 executar "Step2: " "app_2"
 
-read -n 1 -s -p "Press any key to continue 0"
-echo ""
-
-step "Step3: "
-try cmd1
-try app_1
-next
-
-preloading "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
+preloading "sleep 3" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
