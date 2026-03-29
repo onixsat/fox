@@ -47,8 +47,9 @@ function add(){
     
     end_time2=$(date +%s%3N)
     duration_ms2=$((end_time2 - start_time2))
+    GLOBAL_TIME=$($duration_ms2)
     #echo -e "Execution: $duration_ms2"
-    esperar "sleep 2" "Aguardar..." " ${WHITE} Terminado em $duration_ms2"
+    #esperar "sleep 2" "Aguardar..." " ${WHITE} Terminado em $duration_ms2"
 
 }
 get_script_dir(){
