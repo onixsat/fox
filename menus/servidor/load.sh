@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 function preloading(){
   CINZA="$(tput setaf 8)"
   CHECK_MARK="\033[0;32m\xE2\x9C\x94\033[0m"
@@ -36,7 +37,7 @@ function cmd1() {
 #    echo -n "Updating1..."
     sudo apt update -y >/dev/null 2>&1 &
     sudo apt upgrade -y >/dev/null 2>&1 &
-sleep 5
+#sleep 5
 #echo -e ""
 }
 
@@ -45,9 +46,20 @@ function cmd0(){
  #   echo -n "Updating0..."
 #	sudo apt upgrade -y >/dev/null 2>&1 &
 #echo -e ""
-sleep 5
+sleep 2
 }
-clear
+function app_ufw(){
+ufw allow 22
+ufw allow 80/tcp 
+ufw allow 443/tcp 
+ufw allow 21/tcp 
+ufw allow 8080/tcp 
+ufw allow 8443/tcp 
+ufw allow 9000/tcp 
+ufw allow 'Nginx Full'
+ufw allow OpenSSH
+ufw --force enable
+}
 
 log_info "Instalar..."
 step "Step0: "
@@ -55,10 +67,12 @@ try cmd0
 next
 
 step "Step1: "
+try cmd0
 try cmd1
 next
 
-preloading "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
+step "Configuring UFW: "
+try app_ufw
+next
 
-read -n 1 -s -p "Press final"
-echo ""
+preloading "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
