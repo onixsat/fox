@@ -15,7 +15,12 @@ source menus/servidor/config.sh
 function showLoad(){
 banner "Servidor" "$1" "load"
 if @confirm 'Confirma que quer continuar?' ; then
-source menus/servidor/load.sh
+
+  step "Ligar localhost:"
+		try source menus/servidor/load.sh
+	next	
+	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
+
 else
 echo "No"
 fi
