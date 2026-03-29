@@ -288,7 +288,6 @@ function proteger(){
 
   fi
 }
-
 @confirm(){
   local message="$*"
   local result=3
