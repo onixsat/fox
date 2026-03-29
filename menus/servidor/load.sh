@@ -31,26 +31,19 @@ function esperar2(){
   clear
 }
 function cmd0(){ 
-    echo "texto"
-	sleep 5
+    echo -e "texto"
+	sleep 3
 	
 }
 clear
 
-
-
-
-
-
-
-log_info "Instalar1..."
-add "Atualizar" "sudo apt update -y" "1"
+log_info "Instalar..."
+step "Step1:"
+	try cmd0
+	try cmd0
+next	
+	
 esperar "sleep 5" "Instalando..." " ${WHITE} Instalado em $GLOBAL_TIME"
-
-
-log_info "Installing required packages..."
-add "Atualizar" "sudo apt upgrade -y" "1"
-esperar2 "sleep 10" "Instalando2..." " ${WHITE} Instalado2! em ${GLOBAL_TIME}"
 
 read -n 1 -s -p "Press final"
 echo ""
