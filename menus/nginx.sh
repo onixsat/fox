@@ -113,7 +113,7 @@ function showOriginal(){
 }
 
 function showSubmenu2(){
-	source config/submenus.sh
+	source "$thisFilePath/config/submenus.sh"
 	sub-menu "menuNginx"
   reload "return" "menuNginx"
 	pause
