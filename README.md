@@ -11,9 +11,9 @@ cd system-checks
 ```
 
 ```bash
-git clone https://github.com/s-r-e-e-r-a-j/PortEye.git
-cd PortEye
-bash porteye.sh 103.240.146.247 20 80
+git clone https://github.com/itsraiharshit/open-ports-scanner
+cd open-ports-scanner
+python3 open-ports-scanner.py
 ```
 
 ```bash
