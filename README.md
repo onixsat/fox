@@ -1,4 +1,22 @@
 ```bash
+sudo apt update && sudo apt upgrade -y
+
+sudo apt-get install -y net-tools git
+```
+
+```bash
+git clone https://github.com/m0zgen/system-checks.git
+cd system-checks
+./system-check.sh -sn -sd -e
+```
+
+```bash
+git clone https://github.com/s-r-e-e-r-a-j/PortEye.git
+cd PortEye
+bash porteye.sh 103.240.146.247 20 80
+```
+
+```bash
 wget https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/setup5.sh && chmod +x setup5.sh && bash setup5.sh
 ```
 
