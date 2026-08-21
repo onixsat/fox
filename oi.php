@@ -462,10 +462,33 @@ button:hover{background:#1d4ed8}
 .url-tabela{min-width:240px}
 .url-tabela code{display:block;margin-bottom:8px}
  .etiqueta-categoria{display:inline-block;margin-bottom:6px;padding:3px 7px;color:#1e3a8a;background:#dbeafe;border-radius:999px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.05em}
+ .estado-url{display:inline-flex;width:25px;height:25px;align-items:center;justify-content:center;border-radius:50%;font-size:16px;font-weight:bold;line-height:1}
+ .estado-url.verde{color:#166534;background:#bbf7d0;border:1px solid #4ade80}
+ .estado-url.vermelho{color:#991b1b;background:#fecaca;border:1px solid #f87171}
+ .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .editar-form{display:none;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin-top:8px}
 .editar-form.aberto{display:grid}
 .editar-form input{min-width:0}
-@media(max-width:700px){body{padding:8px}.container{padding:16px}th,td{padding:8px;font-size:13px}.player-top{flex-direction:column}}
+@media(max-width:700px){
+ body{padding:6px}
+ .container{padding:12px;border-radius:8px}
+ h1{font-size:23px;line-height:1.2}
+ h2{font-size:19px}
+ th,td{padding:7px;font-size:12px}
+ .player-top{flex-direction:column}
+ table,tbody,tr,td{display:block;width:100%}
+ thead{display:none}
+ tbody{display:grid;gap:10px}
+ tr{padding:8px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px}
+ td{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;border:0;border-bottom:1px solid #e2e8f0;word-break:break-word}
+ td:last-child{border-bottom:0}
+ td::before{content:attr(data-label);color:#475569;font-weight:bold}
+ .url-tabela{min-width:0}
+ .url-tabela code{font-size:11px}
+ .acoes{display:flex;flex-wrap:wrap;gap:5px}
+ .acoes form{display:inline-flex}
+ .acoes button,.botao-secundario,.botao-perigo{padding:6px 8px;font-size:11px}
+}
 @media(max-width:700px){.gestao{grid-template-columns:1fr}.editar-form{grid-template-columns:1fr}}
 </style>
 </head>
@@ -544,8 +567,8 @@ $nomesCategorias = [
 <?php endif; ?>
 <?php foreach ($urlsVisiveis as $numero => $url): ?>
 <tr id="url-<?= e($numero) ?>" class="<?= $idValido && $numero === $id ? 'selecionada' : '' ?>">
-<td><?= e($numero) ?></td>
-<td class="url-tabela">
+<td data-label="ID"><?= e($numero) ?></td>
+<td data-label="URL" class="url-tabela">
     <span class="etiqueta-categoria"><?= e($nomesCategorias[categoriaUrl($url)]) ?></span>
     <a href="?id=<?= e($numero) ?>"><code><?= e($url) ?></code></a>
     <form id="editar-<?= e($numero) ?>" class="editar-form" method="post">
@@ -555,8 +578,20 @@ $nomesCategorias = [
         <button type="submit">Guardar</button>
     </form>
 </td>
-<td><?= $idValido && $numero === $id ? 'Selecionada' : 'Disponível' ?></td>
-<td class="acoes">
+<td data-label="Estado">
+    <?php if ($idValido && $numero === $id): ?>
+        <span class="estado-url verde" title="URL selecionada" aria-label="URL selecionada">
+            <span aria-hidden="true">✓</span>
+            <span class="sr-only">Selecionada</span>
+        </span>
+    <?php else: ?>
+        <span class="estado-url vermelho" title="URL disponível, não selecionada" aria-label="URL disponível, não selecionada">
+            <span aria-hidden="true">●</span>
+            <span class="sr-only">Disponível</span>
+        </span>
+    <?php endif; ?>
+</td>
+<td data-label="Opções" class="acoes">
     <button type="button" class="botao-secundario" onclick="mostrarEdicao(<?= e($numero) ?>)">Editar</button>
     <form method="post" onsubmit="return confirm('Remover esta URL da lista?');">
         <input type="hidden" name="acao" value="remover">
