@@ -45,6 +45,30 @@ function urlValida(string $url): bool
         && $anfitriao !== '';
 }
 
+function categoriaUrl(string $url): string
+{
+    $caminho = strtolower((string) parse_url($url, PHP_URL_PATH));
+    $consulta = strtolower((string) parse_url($url, PHP_URL_QUERY));
+
+    if (
+        preg_match('/(?:^|&)type=m3u(?:&|$)/i', $consulta) === 1
+        || preg_match('/(?:^|&)output=m3u(?:&|$)/i', $consulta) === 1
+        || preg_match('/\.m3u(?:$|[?#])/i', $caminho) === 1
+    ) {
+        return 'm3u';
+    }
+
+    if (
+        preg_match('/\.m3u8(?:$|[?#])/i', $caminho) === 1
+        || str_contains($caminho, '/live/')
+        || str_contains($caminho, '/stream/')
+    ) {
+        return 'streaming';
+    }
+
+    return 'outras';
+}
+
 function carregarUrls(string $ficheiro, array $predefinidas): array
 {
     if (!is_file($ficheiro)) {
@@ -225,6 +249,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$categoriasUrls = [
+    'm3u' => [],
+    'streaming' => [],
+    'outras' => [],
+];
+foreach ($urls as $numero => $url) {
+    $categoriasUrls[categoriaUrl($url)][$numero] = $url;
+}
+
 $estado = (string) ($_GET['estado'] ?? '');
 if ($estado === 'adicionado') {
     $mensagem = 'URL adicionada com sucesso.';
@@ -385,6 +418,22 @@ pre{max-height:450px;overflow:auto;padding:16px;color:#e2e8f0;background:#0f172a
  .detalhes-player.erro-detalhes summary{color:#fecaca;background:#450a0a;border-color:#7f1d1d}
  .detalhes-player pre{max-height:320px;margin:10px 0 0;color:#bae6fd;background:#111827;border:1px solid #0e7490;font-size:12px}
  .detalhes-player.erro-detalhes pre{color:#fecaca;border-color:#7f1d1d}
+ .telemetria{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:16px}
+ .telemetria-cartao{padding:12px;background:#111827;border:1px solid #1e3a5f;border-radius:8px}
+ .telemetria-cartao small{display:block;color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+ .telemetria-cartao strong{display:block;margin-top:5px;color:#e0f2fe;font-size:15px;word-break:break-word}
+ .eventos-stream{margin-top:16px;padding:12px;background:#020617;border:1px solid #1e293b;border-radius:8px}
+ .eventos-stream h3{margin:0 0 8px;color:#bae6fd;font-size:14px}
+ #lista-eventos-stream{max-height:150px;margin:0;padding-left:20px;color:#cbd5e1;font-size:12px;overflow:auto}
+ #lista-eventos-stream li{margin:4px 0}
+ .menu-principal{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px}
+ .menu-principal details{position:relative}
+ .menu-principal summary{padding:9px 12px;color:#1e3a8a;background:#dbeafe;border-radius:7px;cursor:pointer;font-weight:bold;list-style:none}
+ .menu-principal summary::-webkit-details-marker{display:none}
+ .submenu{position:absolute;z-index:5;top:calc(100% + 5px);left:0;min-width:250px;padding:7px;background:#fff;border:1px solid #bfdbfe;border-radius:8px;box-shadow:0 8px 20px #0002}
+ .submenu a{display:block;padding:8px 10px;border-radius:5px}
+ .submenu a:hover{background:#eff6ff;text-decoration:none}
+ .submenu-vazio{padding:8px 10px;color:#64748b;font-size:13px}
 .historico{margin-top:28px}
 .registo{margin:10px 0;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc}
 .registo summary{padding:12px;cursor:pointer;font-weight:bold;color:#1e3a8a}
@@ -405,6 +454,7 @@ button:hover{background:#1d4ed8}
 .botao-perigo:hover{background:#fecaca}
 .url-tabela{min-width:240px}
 .url-tabela code{display:block;margin-bottom:8px}
+ .etiqueta-categoria{display:inline-block;margin-bottom:6px;padding:3px 7px;color:#1e3a8a;background:#dbeafe;border-radius:999px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.05em}
 .editar-form{display:none;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin-top:8px}
 .editar-form.aberto{display:grid}
 .editar-form input{min-width:0}
@@ -416,6 +466,30 @@ button:hover{background:#1d4ed8}
 <main class="container">
 <h1>Relatório de análise de stream</h1>
 <p>Escolha uma URL para analisá-la ou gira a sua lista abaixo.</p>
+
+<nav class="menu-principal" aria-label="Menu de URLs">
+<?php
+$nomesCategorias = [
+    'm3u' => 'URLs M3U',
+    'streaming' => 'URLs streaming',
+    'outras' => 'Outras URLs',
+];
+foreach ($nomesCategorias as $categoria => $nomeCategoria):
+?>
+<details>
+    <summary><?= e($nomeCategoria) ?> (<?= e(count($categoriasUrls[$categoria])) ?>)</summary>
+    <div class="submenu">
+    <?php if ($categoriasUrls[$categoria] === []): ?>
+        <div class="submenu-vazio">Nenhuma URL nesta categoria.</div>
+    <?php else: ?>
+        <?php foreach ($categoriasUrls[$categoria] as $numero => $url): ?>
+            <a href="#url-<?= e($numero) ?>">URL <?= e($numero) ?> — <?= e(parse_url($url, PHP_URL_HOST) ?: 'endereço') ?></a>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    </div>
+</details>
+<?php endforeach; ?>
+</nav>
 
 <?php if ($erro !== null): ?>
 <div class="mensagem erro"><strong>Erro:</strong> <?= e($erro) ?></div>
@@ -456,9 +530,10 @@ button:hover{background:#1d4ed8}
 <thead><tr><th>ID</th><th>URL clicável</th><th>Estado</th><th>Opções</th></tr></thead>
 <tbody>
 <?php foreach ($urls as $numero => $url): ?>
-<tr class="<?= $idValido && $numero === $id ? 'selecionada' : '' ?>">
+<tr id="url-<?= e($numero) ?>" class="<?= $idValido && $numero === $id ? 'selecionada' : '' ?>">
 <td><?= e($numero) ?></td>
 <td class="url-tabela">
+    <span class="etiqueta-categoria"><?= e($nomesCategorias[categoriaUrl($url)]) ?></span>
     <a href="?id=<?= e($numero) ?>"><code><?= e($url) ?></code></a>
     <form id="editar-<?= e($numero) ?>" class="editar-form" method="post">
         <input type="hidden" name="acao" value="editar">
@@ -517,6 +592,20 @@ foreach ($dados as $titulo => $valor):
 <video id="stream-player" controls playsinline preload="metadata">
 O seu navegador não suporta reprodução de vídeo.
 </video>
+
+<div class="telemetria" aria-live="polite">
+    <div class="telemetria-cartao"><small>Estado do vídeo</small><strong id="telemetria-estado">A aguardar</strong></div>
+    <div class="telemetria-cartao"><small>Qualidade</small><strong id="telemetria-qualidade">A aguardar</strong></div>
+    <div class="telemetria-cartao"><small>Bitrate</small><strong id="telemetria-bitrate">A aguardar</strong></div>
+    <div class="telemetria-cartao"><small>Buffer</small><strong id="telemetria-buffer">A aguardar</strong></div>
+    <div class="telemetria-cartao"><small>Tempo atual</small><strong id="telemetria-tempo">A aguardar</strong></div>
+    <div class="telemetria-cartao"><small>Eventos</small><strong id="telemetria-eventos">0</strong></div>
+</div>
+
+<div class="eventos-stream">
+    <h3>Eventos recentes do streaming</h3>
+    <ol id="lista-eventos-stream"><li>A iniciar diagnóstico...</li></ol>
+</div>
 
 <details id="detalhes-player" class="detalhes-player" open>
 <summary id="titulo-detalhes-player">Detalhes completos do streaming</summary>
@@ -603,6 +692,17 @@ function mostrarEdicao(id) {
     const detalhesErro = document.getElementById('detalhes-player');
     const tituloDetalhes = document.getElementById('titulo-detalhes-player');
     const textoErro = document.getElementById('texto-erro-player');
+    const telemetria = {
+        estado: document.getElementById('telemetria-estado'),
+        qualidade: document.getElementById('telemetria-qualidade'),
+        bitrate: document.getElementById('telemetria-bitrate'),
+        buffer: document.getElementById('telemetria-buffer'),
+        tempo: document.getElementById('telemetria-tempo'),
+        eventos: document.getElementById('telemetria-eventos'),
+    };
+    const listaEventos = document.getElementById('lista-eventos-stream');
+    let totalEventos = 0;
+    let ultimoEventoRegistado = '';
     const url = <?= json_encode(
         $analise['finalUrl'],
         JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
@@ -611,6 +711,26 @@ function mostrarEdicao(id) {
     const atualizarEstado = (texto, erro = false) => {
         estado.textContent = texto;
         estado.classList.toggle('erro-player', erro);
+        telemetria.estado.textContent = texto;
+    };
+
+    const registarEvento = (nome, dados = {}) => {
+        const agora = new Date().toLocaleTimeString('pt-PT');
+        const resumo = Object.entries(dados)
+            .filter(([, valor]) => valor !== undefined && valor !== null && valor !== '')
+            .map(([chave, valor]) => `${chave}: ${valor}`)
+            .join(' · ');
+        const texto = `[${agora}] ${nome}${resumo ? ` — ${resumo}` : ''}`;
+        if (texto === ultimoEventoRegistado) return;
+        ultimoEventoRegistado = texto;
+        totalEventos += 1;
+        telemetria.eventos.textContent = String(totalEventos);
+        const item = document.createElement('li');
+        item.textContent = texto;
+        listaEventos.prepend(item);
+        while (listaEventos.children.length > 12) {
+            listaEventos.lastElementChild.remove();
+        }
     };
 
     const guardarRegisto = (estadoAtual, texto) => {
@@ -682,6 +802,34 @@ function mostrarEdicao(id) {
             : 'Sem dados em buffer',
     });
 
+    const atualizarTelemetria = (hls = null) => {
+        const buffer = video.buffered.length > 0
+            ? video.buffered.end(video.buffered.length - 1) - video.currentTime
+            : 0;
+        const nivel = hls && hls.currentLevel >= 0 ? hls.levels[hls.currentLevel] : null;
+        const bitrate = hls && hls.bandwidthEstimate ? hls.bandwidthEstimate : (nivel && nivel.bitrate);
+        telemetria.qualidade.textContent = nivel
+            ? `${nivel.width || '?'}×${nivel.height || '?'}`
+            : (video.videoWidth ? `${video.videoWidth}×${video.videoHeight}` : 'A aguardar');
+        telemetria.bitrate.textContent = bitrate
+            ? `${(Number(bitrate) / 1000000).toFixed(2)} Mbps`
+            : 'Não disponível';
+        telemetria.buffer.textContent = `${Math.max(0, buffer).toFixed(2)} s`;
+        telemetria.tempo.textContent = Number.isFinite(video.currentTime)
+            ? `${video.currentTime.toFixed(1)} s`
+            : 'A aguardar';
+    };
+
+    const intervaloTelemetria = window.setInterval(() => atualizarTelemetria(), 1000);
+    window.addEventListener('beforeunload', () => window.clearInterval(intervaloTelemetria));
+    video.addEventListener('waiting', () => registarEvento('Buffering', detalhesVideo()));
+    video.addEventListener('stalled', () => registarEvento('Rede parada', detalhesVideo()));
+    video.addEventListener('pause', () => registarEvento('Reprodução pausada', detalhesVideo()));
+    video.addEventListener('error', () => registarEvento('Erro do elemento de vídeo', {
+        Código: video.error && video.error.code,
+        Mensagem: video.error && video.error.message,
+    }));
+
     if (window.Hls && window.Hls.isSupported()) {
         const hls = new window.Hls({
             enableWorker: true,
@@ -696,6 +844,11 @@ function mostrarEdicao(id) {
             window.Hls.Events.MANIFEST_PARSED,
             (_evento, dados) => {
                 atualizarEstado('Pronto para reproduzir');
+                registarEvento('Manifesto carregado', {
+                    Níveis: hls.levels.length,
+                    URL: dados && dados.url,
+                });
+                atualizarTelemetria(hls);
                 mostrarDetalhesStreaming('Streaming carregado com sucesso', {
                     Motor: 'HLS.js',
                     NívelInicial: dados && dados.level,
@@ -711,6 +864,8 @@ function mostrarEdicao(id) {
 
         ['loadedmetadata', 'canplay', 'playing'].forEach((evento) => {
             video.addEventListener(evento, () => {
+                atualizarTelemetria(hls);
+                registarEvento(evento === 'playing' ? 'Streaming em reprodução' : `Evento: ${evento}`, detalhesVideo());
                 if (!detalhesErro.classList.contains('erro-detalhes')) {
                     mostrarDetalhesStreaming(
                         evento === 'playing'
@@ -729,6 +884,11 @@ function mostrarEdicao(id) {
         hls.on(
             window.Hls.Events.ERROR,
             (_evento, dados) => {
+                registarEvento(dados.fatal ? 'Falha fatal HLS' : 'Aviso HLS', {
+                    Tipo: dados.type,
+                    Detalhe: dados.details,
+                    CódigoHTTP: dados.response && dados.response.code,
+                });
                 if (dados.fatal) {
                     atualizarEstado('Não foi possível carregar o streaming', true);
                     mostrarDetalhesStreaming('Falha fatal do HLS', {
@@ -749,12 +909,16 @@ function mostrarEdicao(id) {
         video.src = url;
         atualizarEstado('HLS nativo disponível');
         video.addEventListener('loadedmetadata', () => {
+            atualizarTelemetria();
+            registarEvento('Metadados carregados', detalhesVideo());
             mostrarDetalhesStreaming('Streaming carregado com sucesso', {
                 Motor: 'HLS nativo do navegador',
                 ...detalhesVideo(),
             });
         });
         video.addEventListener('playing', () => {
+            atualizarTelemetria();
+            registarEvento('Streaming em reprodução', detalhesVideo());
             mostrarDetalhesStreaming('Streaming em reprodução', {
                 Motor: 'HLS nativo do navegador',
                 ...detalhesVideo(),
