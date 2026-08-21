@@ -1,3 +1,4 @@
+
 <?php
 declare(strict_types=1);
 
@@ -258,6 +259,14 @@ foreach ($urls as $numero => $url) {
     $categoriasUrls[categoriaUrl($url)][$numero] = $url;
 }
 
+$categoriaSelecionada = (string) ($_GET['categoria'] ?? '');
+if (!array_key_exists($categoriaSelecionada, $categoriasUrls)) {
+    $categoriaSelecionada = '';
+}
+$urlsVisiveis = $categoriaSelecionada === ''
+    ? $urls
+    : $categoriasUrls[$categoriaSelecionada];
+
 $estado = (string) ($_GET['estado'] ?? '');
 if ($estado === 'adicionado') {
     $mensagem = 'URL adicionada com sucesso.';
@@ -483,7 +492,7 @@ foreach ($nomesCategorias as $categoria => $nomeCategoria):
         <div class="submenu-vazio">Nenhuma URL nesta categoria.</div>
     <?php else: ?>
         <?php foreach ($categoriasUrls[$categoria] as $numero => $url): ?>
-            <a href="#url-<?= e($numero) ?>">URL <?= e($numero) ?> — <?= e(parse_url($url, PHP_URL_HOST) ?: 'endereço') ?></a>
+            <a href="?categoria=<?= e($categoria) ?>#lista-urls">URL <?= e($numero) ?> — <?= e(parse_url($url, PHP_URL_HOST) ?: 'endereço') ?></a>
         <?php endforeach; ?>
     <?php endif; ?>
     </div>
@@ -525,11 +534,26 @@ foreach ($nomesCategorias as $categoria => $nomeCategoria):
 </form>
 <p class="ajuda">As URLs ficam guardadas em <code>urls.json</code>, junto deste ficheiro PHP. Não são aceites endereços duplicados.</p>
 
-<h2>URLs disponíveis</h2>
+<h2 id="lista-urls">
+    URLs disponíveis
+    <?php if ($categoriaSelecionada !== ''): ?>
+        — <?= e($nomesCategorias[$categoriaSelecionada]) ?>
+    <?php endif; ?>
+</h2>
+<?php if ($categoriaSelecionada !== ''): ?>
+<p class="ajuda">
+    A mostrar <?= e(count($urlsVisiveis)) ?> URL(s).
+    <a href="#lista-urls">Atualizar lista</a> |
+    <a href="?">Mostrar todas</a>
+</p>
+<?php endif; ?>
 <table>
 <thead><tr><th>ID</th><th>URL clicável</th><th>Estado</th><th>Opções</th></tr></thead>
 <tbody>
-<?php foreach ($urls as $numero => $url): ?>
+<?php if ($urlsVisiveis === []): ?>
+<tr><td colspan="4"><div class="mensagem aviso">Não existem URLs disponíveis nesta categoria.</div></td></tr>
+<?php endif; ?>
+<?php foreach ($urlsVisiveis as $numero => $url): ?>
 <tr id="url-<?= e($numero) ?>" class="<?= $idValido && $numero === $id ? 'selecionada' : '' ?>">
 <td><?= e($numero) ?></td>
 <td class="url-tabela">
