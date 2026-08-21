@@ -462,7 +462,7 @@ button:hover{background:#1d4ed8}
 .url-tabela{min-width:240px}
 .url-tabela code{display:block;margin-bottom:8px}
  .etiqueta-categoria{display:inline-block;margin-bottom:6px;padding:3px 7px;color:#1e3a8a;background:#dbeafe;border-radius:999px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.05em}
- .estado-url{display:inline-flex;width:25px;height:25px;align-items:center;justify-content:center;border-radius:50%;font-size:16px;font-weight:bold;line-height:1}
+ .estado-url{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center;border-radius:50%;font-size:0px;font-weight:bold;line-height:1}
  .estado-url.verde{color:#166534;background:#bbf7d0;border:1px solid #4ade80}
  .estado-url.vermelho{color:#991b1b;background:#fecaca;border:1px solid #f87171}
  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -560,16 +560,16 @@ $nomesCategorias = [
 </p>
 <?php endif; ?>
 <table>
-<thead><tr><th>ID</th><th>URL clicável</th><th>Estado</th><th>Opções</th></tr></thead>
+<thead><tr><th style="font-size: 10px;">ID</th><th>URL clicável</th><th></th><th>Opções</th></tr></thead>
 <tbody>
 <?php if ($urlsVisiveis === []): ?>
 <tr><td colspan="4"><div class="mensagem aviso">Não existem URLs disponíveis nesta categoria.</div></td></tr>
 <?php endif; ?>
 <?php foreach ($urlsVisiveis as $numero => $url): ?>
 <tr id="url-<?= e($numero) ?>" class="<?= $idValido && $numero === $id ? 'selecionada' : '' ?>">
-<td data-label="ID"><?= e($numero) ?></td>
+<td data-label="ID" style="padding: 0px;text-align: center;vertical-align: center;"><?= e($numero) ?></td>
 <td data-label="URL" class="url-tabela">
-    <span class="etiqueta-categoria"><?= e($nomesCategorias[categoriaUrl($url)]) ?></span>
+  
     <a href="?id=<?= e($numero) ?>"><code><?= e($url) ?></code></a>
     <form id="editar-<?= e($numero) ?>" class="editar-form" method="post">
         <input type="hidden" name="acao" value="editar">
