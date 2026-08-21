@@ -437,8 +437,8 @@ pre{max-height:450px;overflow:auto;padding:16px;color:#e2e8f0;background:#0f172a
  .eventos-stream h3{margin:0 0 8px;color:#bae6fd;font-size:14px}
  #lista-eventos-stream{max-height:150px;margin:0;padding-left:20px;color:#cbd5e1;font-size:12px;overflow:auto}
  #lista-eventos-stream li{margin:4px 0}
- .menu-principal{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px}
- .menu-botao{display:inline-block;padding:9px 12px;color:#1e3a8a;background:#dbeafe;border:1px solid transparent;border-radius:7px;cursor:pointer;font:inherit;font-weight:bold;text-decoration:none}
+  .menu-principal{display:flex;flex-wrap:nowrap;gap:5px;margin:0 0 24px;padding:6px;overflow-x:auto;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px}
+  .menu-botao{display:inline-block;flex:0 0 auto;padding:6px 8px;color:#1e3a8a;background:#dbeafe;border:1px solid transparent;border-radius:6px;cursor:pointer;font:inherit;font-size:12px;font-weight:bold;line-height:1.2;text-decoration:none;white-space:nowrap}
  .menu-botao:hover{color:#1e3a8a;background:#bfdbfe;text-decoration:none}
  .menu-botao.ativo{color:#fff;background:#2563eb;border-color:#1d4ed8;box-shadow:0 2px 5px #1d4ed855}
 .historico{margin-top:28px}
@@ -478,6 +478,13 @@ button:hover{background:#1d4ed8}
 .editar-form{display:none;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin-top:8px}
 .editar-form.aberto{display:grid}
 .editar-form input{min-width:0}
+ .certificados-restantes{margin-top:12px}
+ .certificados-restantes summary{display:inline-block;padding:8px 11px;color:#1e3a8a;background:#dbeafe;border:1px solid #93c5fd;border-radius:7px;cursor:pointer;font-weight:bold;list-style:none}
+ .certificados-restantes summary::-webkit-details-marker{display:none}
+ .certificados-restantes summary::before{content:'+';display:inline-block;margin-right:6px;font-size:15px}
+ .certificados-restantes[open] summary::before{content:'−'}
+ .certificados-restantes summary:hover{background:#bfdbfe}
+ .certificado-adicional{margin-top:18px}
 @media(max-width:700px){
  body{padding:6px}
  .container{padding:12px;border-radius:8px}
@@ -730,10 +737,23 @@ $detalhesRegisto = $registo['detalhes']['texto']
 
 <h2>SSL Certificate Checker</h2>
 <?php if (!empty($analise['certInfo'])): ?>
-<?php foreach ($analise['certInfo'] as $indice => $certificado): ?>
-<h3>Certificado <?= e($indice + 1) ?></h3>
-<pre><?= e(implode("\n", $certificado)) ?></pre>
-<?php endforeach; ?>
+<?php
+$certificados = array_values($analise['certInfo']);
+$primeiroCertificado = $certificados[0];
+?>
+<h3>Certificado 1</h3>
+<pre><?= e(implode("\n", $primeiroCertificado)) ?></pre>
+<?php if (count($certificados) > 1): ?>
+<details class="certificados-restantes">
+    <summary>Mostrar outros certificados (<?= e(count($certificados) - 1) ?>)</summary>
+    <?php foreach (array_slice($certificados, 1) as $indice => $certificado): ?>
+    <div class="certificado-adicional">
+        <h3>Certificado <?= e($indice + 2) ?></h3>
+        <pre><?= e(implode("\n", $certificado)) ?></pre>
+    </div>
+    <?php endforeach; ?>
+</details>
+<?php endif; ?>
 <?php else: ?>
 <div class="mensagem erro">
 O servidor não devolveu informações do certificado SSL.
