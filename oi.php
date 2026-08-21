@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $urlsPredefinidos = [
-    1 =>'https://ospro.me:8443/get.php?username=dinistesteit&password=c4AhWITgRIuyhnwa&type=m3u&output=m3u8',
+    1 => 'https://ospro.me:8443/get.php?username=dinistesteit&password=c4AhWITgRIuyhnwa&type=m3u&output=m3u8',
     2 => 'https://ospro.pt:8443/get.php?username=dinistesteit&password=c4AhWITgRIuyhnwa&type=m3u&output=m3u8',
     3 => 'https://teamninja21.xyz:8443/get.php?username=dinistesteit&password=c4AhWITgRIuyhnwa&type=m3u&output=m3u8',
     4 => 'https://juninho.xyz:8443/get.php?username=dinistesteit&password=c4AhWITgRIuyhnwa&type=m3u&output=m3u8',
@@ -258,9 +258,9 @@ foreach ($urls as $numero => $url) {
     $categoriasUrls[categoriaUrl($url)][$numero] = $url;
 }
 
-$categoriaSelecionada = (string) ($_GET['categoria'] ?? '');
+$categoriaSelecionada = (string) ($_GET['categoria'] ?? 'm3u');
 if (!array_key_exists($categoriaSelecionada, $categoriasUrls)) {
-    $categoriaSelecionada = '';
+    $categoriaSelecionada = 'm3u';
 }
 $urlsVisiveis = $categoriaSelecionada === ''
     ? $urls
@@ -438,13 +438,9 @@ pre{max-height:450px;overflow:auto;padding:16px;color:#e2e8f0;background:#0f172a
  #lista-eventos-stream{max-height:150px;margin:0;padding-left:20px;color:#cbd5e1;font-size:12px;overflow:auto}
  #lista-eventos-stream li{margin:4px 0}
  .menu-principal{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px}
- .menu-principal details{position:relative}
- .menu-principal summary{padding:9px 12px;color:#1e3a8a;background:#dbeafe;border-radius:7px;cursor:pointer;font-weight:bold;list-style:none}
- .menu-principal summary::-webkit-details-marker{display:none}
- .submenu{position:absolute;z-index:5;top:calc(100% + 5px);left:0;min-width:250px;padding:7px;background:#fff;border:1px solid #bfdbfe;border-radius:8px;box-shadow:0 8px 20px #0002}
- .submenu a{display:block;padding:8px 10px;border-radius:5px}
- .submenu a:hover{background:#eff6ff;text-decoration:none}
- .submenu-vazio{padding:8px 10px;color:#64748b;font-size:13px}
+ .menu-botao{display:inline-block;padding:9px 12px;color:#1e3a8a;background:#dbeafe;border:1px solid transparent;border-radius:7px;cursor:pointer;font:inherit;font-weight:bold;text-decoration:none}
+ .menu-botao:hover{color:#1e3a8a;background:#bfdbfe;text-decoration:none}
+ .menu-botao.ativo{color:#fff;background:#2563eb;border-color:#1d4ed8;box-shadow:0 2px 5px #1d4ed855}
 .historico{margin-top:28px}
 .registo{margin:10px 0;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc}
 .registo summary{padding:12px;cursor:pointer;font-weight:bold;color:#1e3a8a}
@@ -477,31 +473,6 @@ button:hover{background:#1d4ed8}
 <main class="container">
 <h1>Relatório de análise de stream</h1>
 <p>Escolha uma URL para analisá-la ou gira a sua lista abaixo.</p>
-
-<nav class="menu-principal" aria-label="Menu de URLs">
-<?php
-$nomesCategorias = [
-    'm3u' => 'URLs M3U',
-    'streaming' => 'URLs streaming',
-    'outras' => 'Outras URLs',
-];
-foreach ($nomesCategorias as $categoria => $nomeCategoria):
-?>
-<details>
-    <summary><?= e($nomeCategoria) ?> (<?= e(count($categoriasUrls[$categoria])) ?>)</summary>
-    <div class="submenu">
-    <a href="?categoria=<?= e($categoria) ?>#lista-urls"><strong>Mostrar URLs disponíveis</strong></a>
-    <?php if ($categoriasUrls[$categoria] === []): ?>
-        <div class="submenu-vazio">Nenhuma URL nesta categoria.</div>
-    <?php else: ?>
-        <?php foreach ($categoriasUrls[$categoria] as $numero => $url): ?>
-            <a href="?categoria=<?= e($categoria) ?>#lista-urls">URL <?= e($numero) ?> — <?= e(parse_url($url, PHP_URL_HOST) ?: 'endereço') ?></a>
-        <?php endforeach; ?>
-    <?php endif; ?>
-    </div>
-</details>
-<?php endforeach; ?>
-</nav>
 
 <?php if ($erro !== null): ?>
 <div class="mensagem erro"><strong>Erro:</strong> <?= e($erro) ?></div>
@@ -537,6 +508,23 @@ foreach ($nomesCategorias as $categoria => $nomeCategoria):
 </form>
 <p class="ajuda">As URLs ficam guardadas em <code>urls.json</code>, junto deste ficheiro PHP. Não são aceites endereços duplicados.</p>
 
+<?php
+$nomesCategorias = [
+    'm3u' => 'URLs M3U',
+    'streaming' => 'URLs streaming',
+    'outras' => 'Outras URLs',
+];
+?>
+<nav class="menu-principal" aria-label="Filtro de URLs">
+<?php foreach ($nomesCategorias as $categoria => $nomeCategoria): ?>
+    <a
+        class="menu-botao <?= $categoriaSelecionada === $categoria ? 'ativo' : '' ?>"
+        href="?categoria=<?= e($categoria) ?>#lista-urls"
+        <?= $categoriaSelecionada === $categoria ? 'aria-current="page"' : '' ?>
+    ><?= e($nomeCategoria) ?> (<?= e(count($categoriasUrls[$categoria])) ?>)</a>
+<?php endforeach; ?>
+</nav>
+
 <h2 id="lista-urls">
     URLs disponíveis
     <?php if ($categoriaSelecionada !== ''): ?>
@@ -545,9 +533,7 @@ foreach ($nomesCategorias as $categoria => $nomeCategoria):
 </h2>
 <?php if ($categoriaSelecionada !== ''): ?>
 <p class="ajuda">
-    A mostrar <?= e(count($urlsVisiveis)) ?> URL(s).
-    <a href="#lista-urls">Atualizar lista</a> |
-    <a href="?">Mostrar todas</a>
+    A mostrar <?= e(count($urlsVisiveis)) ?> URL(s) desta categoria.
 </p>
 <?php endif; ?>
 <table>
