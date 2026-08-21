@@ -656,7 +656,12 @@ a porta <code>8081</code> e se esta URL necessita de parâmetros adicionais.
 Esta resposta é uma playlist/catálogo M3U e não um vídeo HLS direto.
 Escolha uma URL direta terminada em <code>.m3u8</code> para utilizar o player.
 </div>
-<?php endif; ?storico === null): ?>
+<?php endif; ?>
+<?php endif; ?>
+
+<section class="historico">
+<h2>Registo completo desta URL</h2>
+<?php if ($urlParaHistorico === null): ?>
 <div class="mensagem aviso">Selecione uma URL para consultar o histórico.</div>
 <?php else: ?>
 <p class="ajuda">Os registos são guardados em <code>stream-logs.json</code> com a data e hora de cada evento.</p>
