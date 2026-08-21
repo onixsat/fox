@@ -462,10 +462,19 @@ button:hover{background:#1d4ed8}
 .url-tabela{min-width:240px}
 .url-tabela code{display:block;margin-bottom:8px}
  .etiqueta-categoria{display:inline-block;margin-bottom:6px;padding:3px 7px;color:#1e3a8a;background:#dbeafe;border-radius:999px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.05em}
- .estado-url{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center;border-radius:50%;font-size:0px;font-weight:bold;line-height:1}
+ .estado-url{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;border-radius:50%;font-size:11px;font-weight:bold;line-height:1}
  .estado-url.verde{color:#166534;background:#bbf7d0;border:1px solid #4ade80}
  .estado-url.vermelho{color:#991b1b;background:#fecaca;border:1px solid #f87171}
+ .id-col{font-size:12px;font-weight:bold;color:#475569}
  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+ .acoes-menu{position:relative;display:inline-block}
+ .acoes-menu summary{display:flex;width:24px;height:24px;align-items:center;justify-content:center;padding:0;color:#1e3a8a;background:#dbeafe;border-radius:6px;cursor:pointer;font-size:18px;font-weight:bold;line-height:1;list-style:none}
+ .acoes-menu summary::-webkit-details-marker{display:none}
+ .acoes-menu summary:hover{background:#bfdbfe}
+ .acoes-submenu{position:absolute;z-index:10;top:calc(100% + 4px);right:0;min-width:105px;padding:5px;background:#fff;border:1px solid #bfdbfe;border-radius:7px;box-shadow:0 8px 18px #0002}
+ .acoes-submenu button,.acoes-submenu form{display:block;width:100%}
+ .acoes-submenu button,.acoes-submenu .botao-perigo{padding:7px 9px;text-align:left;font-size:12px}
+ .acoes-submenu .botao-secundario{background:#dbeafe}
 .editar-form{display:none;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin-top:8px}
 .editar-form.aberto{display:grid}
 .editar-form input{min-width:0}
@@ -474,20 +483,24 @@ button:hover{background:#1d4ed8}
  .container{padding:12px;border-radius:8px}
  h1{font-size:23px;line-height:1.2}
  h2{font-size:19px}
- th,td{padding:7px;font-size:12px}
+ th,td{padding:5px;font-size:11px}
  .player-top{flex-direction:column}
- table,tbody,tr,td{display:block;width:100%}
- thead{display:none}
- tbody{display:grid;gap:10px}
- tr{padding:8px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px}
- td{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;border:0;border-bottom:1px solid #e2e8f0;word-break:break-word}
- td:last-child{border-bottom:0}
- td::before{content:attr(data-label);color:#475569;font-weight:bold}
- .url-tabela{min-width:0}
- .url-tabela code{font-size:11px}
- .acoes{display:flex;flex-wrap:wrap;gap:5px}
- .acoes form{display:inline-flex}
- .acoes button,.botao-secundario,.botao-perigo{padding:6px 8px;font-size:11px}
+ table{table-layout:fixed}
+ th{font-size:10px;white-space:nowrap}
+ th:first-child,td:first-child{width:34px}
+ th:nth-child(3),td:nth-child(3){width:28px;text-align:center}
+ th:last-child,td:last-child{width:34px}
+ tbody{display:table-row-group}
+ tr{height:34px}
+ td{height:34px;white-space:nowrap;overflow:visible}
+ td::before{display:none}
+ .url-tabela{min-width:0;max-width:0;overflow:hidden;text-overflow:ellipsis}
+ .url-tabela code{display:block;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}
+ .etiqueta-categoria{display:none}
+ .estado-url{width:14px;height:14px;font-size:8px}
+ .acoes{display:table-cell;overflow:visible}
+ .acoes-menu summary{width:22px;height:22px;font-size:16px}
+ .editar-form{position:fixed;left:8px;right:8px;z-index:20;padding:8px;background:#fff;border:1px solid #bfdbfe;border-radius:7px;box-shadow:0 8px 18px #0003}
 }
 @media(max-width:700px){.gestao{grid-template-columns:1fr}.editar-form{grid-template-columns:1fr}}
 </style>
@@ -560,16 +573,16 @@ $nomesCategorias = [
 </p>
 <?php endif; ?>
 <table>
-<thead><tr><th style="font-size: 10px;">ID</th><th>URL clicável</th><th></th><th>Opções</th></tr></thead>
+<thead><tr><th>ID</th><th>URL clicável</th><th aria-label="Estado"></th><th>Opções</th></tr></thead>
 <tbody>
 <?php if ($urlsVisiveis === []): ?>
 <tr><td colspan="4"><div class="mensagem aviso">Não existem URLs disponíveis nesta categoria.</div></td></tr>
 <?php endif; ?>
 <?php foreach ($urlsVisiveis as $numero => $url): ?>
 <tr id="url-<?= e($numero) ?>" class="<?= $idValido && $numero === $id ? 'selecionada' : '' ?>">
-<td data-label="ID" style="padding: 0px;text-align: center;vertical-align: center;"><?= e($numero) ?></td>
+<td data-label="ID" class="id-col"><?= e($numero) ?></td>
 <td data-label="URL" class="url-tabela">
-  
+    <span class="etiqueta-categoria"><?= e($nomesCategorias[categoriaUrl($url)]) ?></span>
     <a href="?id=<?= e($numero) ?>"><code><?= e($url) ?></code></a>
     <form id="editar-<?= e($numero) ?>" class="editar-form" method="post">
         <input type="hidden" name="acao" value="editar">
@@ -592,12 +605,17 @@ $nomesCategorias = [
     <?php endif; ?>
 </td>
 <td data-label="Opções" class="acoes">
-    <button type="button" class="botao-secundario" onclick="mostrarEdicao(<?= e($numero) ?>)">Editar</button>
-    <form method="post" onsubmit="return confirm('Remover esta URL da lista?');">
-        <input type="hidden" name="acao" value="remover">
-        <input type="hidden" name="id" value="<?= e($numero) ?>">
-        <button type="submit" class="botao-perigo">Remover</button>
-    </form>
+    <details class="acoes-menu">
+        <summary aria-label="Abrir opções da URL <?= e($numero) ?>">⋮</summary>
+        <div class="acoes-submenu">
+            <button type="button" class="botao-secundario" onclick="mostrarEdicao(<?= e($numero) ?>)">Editar</button>
+            <form method="post" onsubmit="return confirm('Remover esta URL da lista?');">
+                <input type="hidden" name="acao" value="remover">
+                <input type="hidden" name="id" value="<?= e($numero) ?>">
+                <button type="submit" class="botao-perigo">Remover</button>
+            </form>
+        </div>
+    </details>
 </td>
 </tr>
 <?php endforeach; ?>
