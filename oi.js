@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+<styles>@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 
 .json {
     font-family: 'Source Code Pro', monospace;
@@ -79,8 +79,8 @@
 .json__value--boolean {
     color: red;
   }
-
-
+</styles>
+<script>
 function jsonViewer(json, collapsible=false) {
     var TEMPLATES = {
         item: '<div class="json__item"><div class="json__key">%KEY%</div><div class="json__value json__value--%TYPE%">%VALUE%</div></div>',
@@ -180,3 +180,4 @@ var json2 = {
 
 var el = document.querySelector('.target');
 el.innerHTML = jsonViewer(json, true);
+</script>
