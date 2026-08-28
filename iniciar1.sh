@@ -29,7 +29,7 @@ detetar_servidor() {
 }
 
 # =====================================================================
-# SUBMENU 1: CONFIGURAÇÃO DO NOVO DOMÍNIO (O CÓDIGO ANTERIOR)
+# SUBMENU 1: CONFIGURAÇÃO DO NOVO DOMÍNIO
 # =====================================================================
 configurar_novo_dominio() {
     clear
@@ -175,7 +175,7 @@ menu_ssl() {
                 ;;
             0) break ;;
             *) echo -e "${RED}Opção inválida!${NC}"; sleep 1 ;;
-         Harlowes esac
+        esac
     done
 }
 
@@ -243,3 +243,5 @@ while true; do
     echo -e "5) Estado Geral dos Serviços (Apache/Nginx/PHP)"
     echo -e "0) Sair do Script"
     echo -e "${BLUE}=====================================================${NC}"
+    read -p "Selecione a opção pretendida: " OP_MAIN
+
