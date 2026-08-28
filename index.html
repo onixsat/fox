@@ -214,7 +214,7 @@
       return `<div class="json">${content}</div>`;
     }
 
-    fetch("./log.json")
+    fetch("./results.jsonl")
       .then(response => {
         if (!response.ok) {
           throw new Error("Não foi possível carregar o arquivo log.json");
